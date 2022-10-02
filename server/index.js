@@ -7,11 +7,12 @@ import postRoutes from "./routes/posts.js";
 
 const app = express();
 
+// Route files
 app.use("/posts", postRoutes);
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.unsubscribe(cors());
+app.use(cors());
 
 const USERNAME = "jakub";
 const PASSWORD = "user321123";
