@@ -7,13 +7,13 @@ import thunk from "redux-thunk";
 import App from "./App";
 import reducers from "./reducers";
 
-const store = legacy_createStore(reducers, compose(applyMiddleware));
+const store = legacy_createStore(reducers, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+  </>,
   document.getElementById("root")
 );
