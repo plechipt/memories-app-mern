@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 
+import { addPost } from "../../redux/posts";
 import useStyles from "./styles";
-import { createPost } from "../../actions/posts";
 
 const Form = () => {
   const classes = useStyles();
@@ -19,8 +19,10 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(createPost({ creator, title, text, tags, selectedFile }));
+    dispatch(addPost({ creator, title, text, tags, selectedFile }));
+    clear();
   };
+
   const clear = () => {
     setCreator("");
     setTitle("");
