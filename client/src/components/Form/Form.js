@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import useStyles from "./styles";
+import { useDispatch } from "react-redux";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 
+import useStyles from "./styles";
+import { createPost } from "../../actions/posts";
+
 const Form = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [creator, setCreator] = useState("");
   const [title, setTitle] = useState("");
@@ -12,7 +16,11 @@ const Form = () => {
   const [tags, setTags] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(createPost({ creator, title, text, tags, selectedFile }));
+  };
   const clear = () => {
     setCreator("");
     setTitle("");
@@ -22,12 +30,12 @@ const Form = () => {
   };
 
   return (
-    <Paper classname={classes.paper}>
+    <Paper className={classes.paper}>
       <form
         autoComplete="off"
         noValidate
         className={`${classes.root} ${classes.form}`}
-        onsubmit={handleSubmit}
+        onSubmit={handleSubmit}
       >
         <Typography variant="h6">Creating a memory</Typography>
         <TextField
@@ -75,7 +83,7 @@ const Form = () => {
           variant="contained"
           color="primary"
           size="large"
-          onClick={handleSubmit()}
+          onClick={handleSubmit}
           fullWidth
         >
           Submit
