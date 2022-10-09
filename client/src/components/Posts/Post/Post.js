@@ -3,6 +3,7 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import {
+  Box,
   Card,
   CardActions,
   CardContent,
@@ -48,7 +49,7 @@ const Post = ({ post }) => {
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary" onClick={() => {}}>
           <ThumbUpAltIcon fontSize="small" />
-          Like
+          <Box mr={1}>Like</Box>
           {post.likeCount}
         </Button>
         <Button size="small" color="primary" onClick={() => {}}>

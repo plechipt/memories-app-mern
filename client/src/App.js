@@ -26,6 +26,7 @@ function App() {
         <Container>
           <Grid
             container
+            direction="row"
             justifyContent="space-between"
             alignItems="stretch"
             spacing={3}
