@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -12,10 +13,17 @@ import {
   Typography,
 } from "@material-ui/core";
 import moment from "moment";
+
 import useStyles from "./styles";
+import { fillForm } from "../../../redux/forms";
 
 const Post = ({ post }) => {
+  const dispatch = useDispatch();
   const defaultImage = process.env.REACT_APP_DEFAULT_IMAGE;
+
+  const handleOnUpdate = () => {
+    dispatch(fillForm(post));
+  };
 
   const classes = useStyles();
   return (
@@ -32,7 +40,13 @@ const Post = ({ post }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => {}}>
+        <Button
+          style={{ color: "white" }}
+          size="small"
+          onClick={() => {
+            handleOnUpdate();
+          }}
+        >
           <MoreHorizIcon fontSize="medium" />
         </Button>
       </div>

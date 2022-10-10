@@ -16,8 +16,6 @@ const Posts = () => {
     dispatch(fetchPosts());
   }, []);
 
-  console.log(posts);
-
   return !posts.length ? (
     <CircularProgress color="primary" />
   ) : (

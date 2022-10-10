@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 
@@ -9,12 +9,30 @@ import useStyles from "./styles";
 const Form = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { formData } = useSelector((state) => state.form.form);
+
+  useEffect(() => {
+    if (formData !== undefined) {
+      console.log(formData);
+      updateForm();
+    }
+  }, [formData]);
 
   const [creator, setCreator] = useState("");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [tags, setTags] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
+
+  const updateForm = () => {
+    const { creator, title, text, tags, selectedFile } = formData;
+
+    setCreator(creator);
+    setTitle(title);
+    setText(text);
+    setTags(tags);
+    setSelectedFile(selectedFile);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

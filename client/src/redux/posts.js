@@ -25,6 +25,7 @@ export const postSlice = createSlice({
   name: "posts",
   initialState: {
     posts: [],
+    form: [],
     status: "idle",
     error: null,
   },
@@ -40,4 +41,5 @@ export const postSlice = createSlice({
   },
 });
 
+//export const { fillForm } = postSlice.actions;
 export default postSlice.reducer;
