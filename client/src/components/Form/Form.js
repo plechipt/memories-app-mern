@@ -3,30 +3,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 
-import { addPost } from "../../redux/posts";
+import { addPost, updatePost } from "../../redux/posts";
 import useStyles from "./styles";
 
 const Form = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { formData } = useSelector((state) => state.form.form);
+  const [formIsInUpdateMode, setFormIsInUpdateMode] = useState(false);
 
-  useEffect(() => {
-    if (formData !== undefined) {
-      console.log(formData);
-      updateForm();
-    }
-  }, [formData]);
-
+  const [currentId, setCurrentId] = useState(0);
   const [creator, setCreator] = useState("");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [tags, setTags] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
 
-  const updateForm = () => {
-    const { creator, title, text, tags, selectedFile } = formData;
+  useEffect(() => {
+    if (formData !== undefined) {
+      fillForm();
+      setFormIsInUpdateMode(true);
+    }
+  }, [formData]);
 
+  const fillForm = () => {
+    const { _id, creator, title, text, tags, selectedFile } = formData;
+
+    setCurrentId(_id);
     setCreator(creator);
     setTitle(title);
     setText(text);
@@ -34,10 +37,19 @@ const Form = () => {
     setSelectedFile(selectedFile);
   };
 
-  const handleSubmit = (e) => {
+  const createPost = (e) => {
     e.preventDefault();
 
     dispatch(addPost({ creator, title, text, tags, selectedFile }));
+    clear();
+  };
+
+  const patchPost = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      updatePost({ currentId, creator, title, text, tags, selectedFile })
+    );
     clear();
   };
 
@@ -47,6 +59,8 @@ const Form = () => {
     setText("");
     setTags("");
     setSelectedFile("");
+
+    setFormIsInUpdateMode(false);
   };
 
   return (
@@ -55,9 +69,11 @@ const Form = () => {
         autoComplete="off"
         noValidate
         className={`${classes.root} ${classes.form}`}
-        onSubmit={handleSubmit}
+        onSubmit={formIsInUpdateMode ? patchPost : createPost}
       >
-        <Typography variant="h6">Creating a memory</Typography>
+        <Typography variant="h6">
+          {formIsInUpdateMode ? "Updating" : "Creating"} a memory
+        </Typography>
         <TextField
           name="creator"
           variant="outlined"
@@ -103,8 +119,8 @@ const Form = () => {
           variant="contained"
           color="primary"
           size="large"
-          onClick={handleSubmit}
           fullWidth
+          type="submit"
         >
           Submit
         </Button>
