@@ -55,9 +55,12 @@ const Post = ({ post }) => {
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
+      <Typography className={classes.title} variant="h5" gutterBottom>
+        {post.title}
+      </Typography>
       <CardContent>
-        <Typography className={classes.title} variant="h5" gutterBottom>
-          {post.message}
+        <Typography variant="h5" gutterBottom>
+          {post.text}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
