@@ -13,7 +13,8 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
 
 export const addPost = createAsyncThunk("posts/addPost", async (post) => {
   try {
-    const { data } = await api.createPost(post);
+    const { formData } = post;
+    const { data } = await api.createPost(formData);
 
     return data;
   } catch (error) {
@@ -23,7 +24,8 @@ export const addPost = createAsyncThunk("posts/addPost", async (post) => {
 
 export const updatePost = createAsyncThunk("posts/updatePost", async (post) => {
   try {
-    const { data } = await api.updatePost(post);
+    const { formData } = post;
+    const { data } = await api.updatePost(formData);
 
     return data;
   } catch (error) {

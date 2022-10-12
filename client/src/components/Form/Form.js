@@ -9,58 +9,53 @@ import useStyles from "./styles";
 const Form = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { formData } = useSelector((state) => state.form.form);
+  const { receivedFormData } = useSelector((state) => state.form.form);
   const [formIsInUpdateMode, setFormIsInUpdateMode] = useState(false);
 
   const [currentId, setCurrentId] = useState(0);
-  const [creator, setCreator] = useState("");
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [tags, setTags] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
+  const [formData, setFormData] = useState({
+    creator: "",
+    title: "",
+    text: "",
+    tags: "",
+    selectedFile: "",
+  });
 
   useEffect(() => {
-    if (formData !== undefined) {
+    if (receivedFormData !== undefined) {
       fillForm();
       setFormIsInUpdateMode(true);
     }
-  }, [formData]);
+  }, [receivedFormData]);
 
   const fillForm = () => {
-    const { _id, creator, title, text, tags, selectedFile } = formData;
-
-    setCurrentId(_id);
-    setCreator(creator);
-    setTitle(title);
-    setText(text);
-    setTags(tags);
-    setSelectedFile(selectedFile);
+    setFormData(receivedFormData);
+    setCurrentId(receivedFormData._id);
   };
 
   const createPost = (e) => {
     e.preventDefault();
 
-    dispatch(addPost({ creator, title, text, tags, selectedFile }));
+    dispatch(addPost({ formData }));
     clear();
   };
 
   const patchPost = (e) => {
     e.preventDefault();
 
-    dispatch(
-      updatePost({ currentId, creator, title, text, tags, selectedFile })
-    );
+    dispatch(updatePost({ formData }));
     clear();
   };
 
   const clear = () => {
-    setCreator("");
-    setTitle("");
-    setText("");
-    setTags("");
-    setSelectedFile("");
-
     setFormIsInUpdateMode(false);
+    setFormData({
+      creator: "",
+      title: "",
+      text: "",
+      tags: "",
+      selectedFile: "",
+    });
   };
 
   return (
@@ -79,39 +74,43 @@ const Form = () => {
           variant="outlined"
           label="Creator"
           fullWidth
-          value={creator}
-          onChange={(e) => setCreator(e.target.value)}
+          value={formData.creator}
+          onChange={(e) =>
+            setFormData({ ...formData, creator: e.target.value })
+          }
         ></TextField>
         <TextField
           name="title"
           variant="outlined"
           label="Title"
           fullWidth
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={formData.title}
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
         ></TextField>
         <TextField
           name="text"
           variant="outlined"
           label="Text"
           fullWidth
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={formData.text}
+          onChange={(e) => setFormData({ ...formData, text: e.target.value })}
         ></TextField>
         <TextField
           name="tags"
           variant="outlined"
           label="Tags"
           fullWidth
-          value={tags}
-          onChange={(e) => setTags(e.target.value)}
+          value={formData.tags}
+          onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
         ></TextField>
 
         <div className={classes.fileInput}>
           <FileBase
             type="file"
             multiple={false}
-            onDone={({ base64 }) => setSelectedFile(base64)}
+            onDone={({ base64 }) =>
+              setFormData({ ...formData, selectedFile: base64 })
+            }
           />
         </div>
         <Button

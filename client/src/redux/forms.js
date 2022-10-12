@@ -10,7 +10,7 @@ export const formSlice = createSlice({
   },
   reducers: {
     fillForm: (state, action) => {
-      state.form.formData = action.payload;
+      state.form.receivedFormData = action.payload;
     },
   },
 });
