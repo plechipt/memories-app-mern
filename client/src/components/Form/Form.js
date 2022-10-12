@@ -12,7 +12,6 @@ const Form = () => {
   const { receivedFormData } = useSelector((state) => state.form.form);
   const [formIsInUpdateMode, setFormIsInUpdateMode] = useState(false);
 
-  const [currentId, setCurrentId] = useState(0);
   const [formData, setFormData] = useState({
     creator: "",
     title: "",
@@ -30,7 +29,6 @@ const Form = () => {
 
   const fillForm = () => {
     setFormData(receivedFormData);
-    setCurrentId(receivedFormData._id);
   };
 
   const createPost = (e) => {
