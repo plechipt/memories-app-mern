@@ -16,6 +16,7 @@ import moment from "moment";
 
 import useStyles from "./styles";
 import { fillForm } from "../../../redux/forms";
+import { deletePost } from "../../../redux/posts";
 
 const Post = ({ post }) => {
   const dispatch = useDispatch();
@@ -23,6 +24,10 @@ const Post = ({ post }) => {
 
   const handleOnUpdate = () => {
     dispatch(fillForm(post));
+  };
+
+  const handleOnDelete = () => {
+    dispatch(deletePost(post._id));
   };
 
   const classes = useStyles();
@@ -69,7 +74,7 @@ const Post = ({ post }) => {
           <Box mr={1}>Like</Box>
           {post.likeCount}
         </Button>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button size="small" color="primary" onClick={handleOnDelete}>
           <DeleteIcon fontSize="small" />
           Delete
         </Button>

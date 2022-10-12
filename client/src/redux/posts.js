@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import * as api from "../api";
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
@@ -22,12 +22,24 @@ export const addPost = createAsyncThunk("posts/addPost", async (post) => {
   }
 });
 
-export const updatePost = createAsyncThunk("posts/updatePost", async (post) => {
-  try {
-    const { formData } = post;
-    const { data } = await api.updatePost(formData);
+export const updatePost = createAsyncThunk(
+  "posts/updatePost",
+  async ({ formData }) => {
+    try {
+      const { data } = await api.updatePost(formData);
 
-    return data;
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk("posts/deletePost", async (_id) => {
+  try {
+    await api.deletePost(_id);
+
+    return _id;
   } catch (error) {
     console.log(error.message);
   }
@@ -50,6 +62,7 @@ export const postSlice = createSlice({
       state.posts.push(action.payload);
     },
     [updatePost.fulfilled]: (state, action) => {
+      state.status = "succeeded";
       let index = state.posts.findIndex(
         (post) => post._id === action.payload._id
       );
@@ -57,6 +70,13 @@ export const postSlice = createSlice({
         ...state.posts[index],
         ...action.payload,
       };
+    },
+    [deletePost.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+
+      let index = state.posts.findIndex(({ _id }) => _id === action.payload);
+      console.log(index);
+      state.posts.splice(index, 1);
     },
   },
 });
