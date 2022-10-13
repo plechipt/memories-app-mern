@@ -68,39 +68,39 @@ export const postSlice = createSlice({
   extraReducers: {
     [fetchPosts.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.posts.push(...action.payload);
+
+      const newPosts = action.payload;
+      state.posts = newPosts;
     },
     [addPost.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.posts.push(action.payload);
+
+      const newPosts = [...state.posts, action.payload];
+      state.posts = newPosts;
     },
     [updatePost.fulfilled]: (state, action) => {
       state.status = "succeeded";
 
-      let index = state.posts.findIndex(
-        (post) => post._id === action.payload._id
+      const newPosts = state.posts.map((post) =>
+        post._id === action.payload._id ? action.payload : post
       );
-      state.posts[index] = {
-        ...state.posts[index],
-        ...action.payload,
-      };
+      state.posts = newPosts;
     },
     [deletePost.fulfilled]: (state, action) => {
       state.status = "succeeded";
 
-      let index = state.posts.findIndex(({ _id }) => _id === action.payload);
-      state.posts.splice(index, 1);
+      const newPosts = state.posts.filter(
+        (post) => post._id !== action.payload
+      );
+      state.posts = newPosts;
     },
     [likePost.fulfilled]: (state, action) => {
       state.status = "succeeded";
 
-      let index = state.posts.findIndex(
-        (post) => post._id === action.payload._id
+      const newPosts = state.posts.map((post) =>
+        post._id === action.payload._id ? action.payload : post
       );
-      state.posts[index] = {
-        ...state.posts[index],
-        ...action.payload,
-      };
+      state.posts = newPosts;
     },
   },
 });
