@@ -45,6 +45,19 @@ export const deletePost = createAsyncThunk("posts/deletePost", async (_id) => {
   }
 });
 
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async (likedPost) => {
+    try {
+      const { data } = await api.likePost(likedPost);
+
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+);
+
 export const postSlice = createSlice({
   name: "posts",
   initialState: {
@@ -63,6 +76,7 @@ export const postSlice = createSlice({
     },
     [updatePost.fulfilled]: (state, action) => {
       state.status = "succeeded";
+
       let index = state.posts.findIndex(
         (post) => post._id === action.payload._id
       );
@@ -75,8 +89,18 @@ export const postSlice = createSlice({
       state.status = "succeeded";
 
       let index = state.posts.findIndex(({ _id }) => _id === action.payload);
-      console.log(index);
       state.posts.splice(index, 1);
+    },
+    [likePost.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+
+      let index = state.posts.findIndex(
+        (post) => post._id === action.payload._id
+      );
+      state.posts[index] = {
+        ...state.posts[index],
+        ...action.payload,
+      };
     },
   },
 });

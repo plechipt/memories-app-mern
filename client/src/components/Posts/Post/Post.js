@@ -16,7 +16,7 @@ import moment from "moment";
 
 import useStyles from "./styles";
 import { fillForm } from "../../../redux/forms";
-import { deletePost } from "../../../redux/posts";
+import { deletePost, likePost } from "../../../redux/posts";
 
 const Post = ({ post }) => {
   const dispatch = useDispatch();
@@ -28,6 +28,10 @@ const Post = ({ post }) => {
 
   const handleOnDelete = () => {
     dispatch(deletePost(post._id));
+  };
+
+  const handleOnLike = () => {
+    dispatch(likePost(post));
   };
 
   const classes = useStyles();
@@ -69,7 +73,7 @@ const Post = ({ post }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button size="small" color="primary" onClick={handleOnLike}>
           <ThumbUpAltIcon fontSize="small" />
           <Box mr={1}>Like</Box>
           {post.likeCount}
