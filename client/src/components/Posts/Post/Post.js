@@ -16,7 +16,7 @@ import moment from "moment";
 
 import useStyles from "./styles";
 import { fillForm } from "../../../redux/forms";
-import { deletePost, likePost } from "../../../redux/posts";
+import { deletePost, likePost } from "../../../redux/actionCreators";
 
 const Post = ({ post }) => {
   const dispatch = useDispatch();
