@@ -99,7 +99,9 @@ const Form = () => {
           label="Tags"
           fullWidth
           value={formData.tags}
-          onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, tags: e.target.value.split(",") })
+          }
         ></TextField>
 
         <div className={classes.fileInput}>
