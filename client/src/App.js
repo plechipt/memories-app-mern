@@ -31,10 +31,10 @@ function App() {
             alignItems="stretch"
             spacing={3}
           >
-            <Grid item xs={12} sm={7}>
+            <Grid className={classes.postsContainer} item md={12} lg={7}>
               <Posts />
             </Grid>
-            <Grid item xs={12} sm={7}>
+            <Grid className={classes.gridContainer} item md={12} lg={4}>
               <Form />
             </Grid>
           </Grid>
