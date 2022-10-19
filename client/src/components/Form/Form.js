@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 
-import { addPost, updatePost } from "../../redux/actionCreators";
+import { addPost, updatePost } from "../../redux/actionCreators/posts";
 import useStyles from "./styles";
 
 const Form = () => {

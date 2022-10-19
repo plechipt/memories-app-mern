@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Grid, CircularProgress } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../../redux/actionCreators";
+import { fetchPosts } from "../../redux/actionCreators/posts";
 
 import Post from "./Post/Post";
 import useStyles from "./styles";

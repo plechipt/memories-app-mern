@@ -5,7 +5,7 @@ import {
   updatePost,
   deletePost,
   likePost,
-} from "./actionCreators";
+} from "../actionCreators/posts";
 
 export const postSlice = createSlice({
   name: "posts",
