@@ -14,5 +14,5 @@ export const likePost = (likedPost) =>
 const URL2 = "http://localhost:5000/users";
 // Users
 // Users
-export const register = (data) => axios.post(`${URL2}`, data);
+export const register = (user) => axios.post(`${URL2}`, user);
 export const login = () => axios.post(`${URL2}/info`);

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
   CssBaseline,
   Container,
@@ -12,11 +14,12 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
+import { register } from "../../redux/actionCreators/users";
 
 export default function Register() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -25,6 +28,8 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    dispatch(register({ username, password }));
   };
 
   return (
