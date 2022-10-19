@@ -1,6 +1,7 @@
 import express from "express";
 import {
   authMiddleware,
+  getUsers,
   registerUser,
   loginUser,
   getInfo,
@@ -8,6 +9,7 @@ import {
 
 const router = express.Router();
 
+router.get("/", getUsers);
 router.post("/", registerUser);
 router.post("/login", loginUser);
 router.get("/info", authMiddleware, getInfo);
