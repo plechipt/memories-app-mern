@@ -16,6 +16,7 @@ import {
 
 import useStyles from "./styles";
 import { register } from "../../redux/actionCreators/users";
+import { resetUser } from "../../redux/slices/users";
 
 export default function Register() {
   const classes = useStyles();
@@ -33,6 +34,8 @@ export default function Register() {
       }
     }
     if (user.statusCode === 200) {
+      dispatch(resetUser());
+
       clearForm();
       resetErrors();
       navigate("/login");

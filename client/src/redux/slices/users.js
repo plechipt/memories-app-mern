@@ -1,12 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { register } from "../actionCreators/users";
 
+const initialState = {
+  user: {},
+  status: "idle",
+  error: null,
+};
+
 export const userSlice = createSlice({
   name: "counter",
   initialState: {
-    user: {},
-    status: "idle",
-    error: null,
+    ...initialState,
+  },
+  reducers: {
+    resetUser: () => initialState,
   },
   extraReducers: {
     [register.fulfilled]: (state, action) => {
@@ -20,5 +27,5 @@ export const userSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
+export const { resetUser } = userSlice.actions;
 export default userSlice.reducer;
