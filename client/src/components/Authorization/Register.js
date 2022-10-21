@@ -27,13 +27,13 @@ export default function Register() {
 
   // Data has been send back from server
   useEffect(() => {
-    console.log(user);
-    if (user.statusCode === 400) {
-      if (user.errorType === 1) {
+    const { statusCode, errorType } = user;
+
+    if (statusCode === 400) {
+      if (errorType === 1) {
         setUsernameAlreadyExists(true);
       }
-    }
-    if (user.statusCode === 200) {
+    } else if (statusCode === 200) {
       dispatch(resetUser());
 
       clearForm();

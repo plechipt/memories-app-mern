@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register } from "../actionCreators/users";
+import { register, login } from "../actionCreators/users";
 
 const initialState = {
   user: {},
@@ -21,6 +21,14 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     [register.rejected]: (state, action) => {
+      state.status = "error";
+      state.user = action.payload;
+    },
+    [login.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.user = action.payload;
+    },
+    [login.rejected]: (state, action) => {
       state.status = "error";
       state.user = action.payload;
     },

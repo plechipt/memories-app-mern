@@ -84,6 +84,9 @@ export const registerUser = async (req, res) => {
   }
 };
 
+const loginErrorMessage = "Username or password is incorrect!";
+const errorObject = { statusCode: 400, message: loginErrorMessage };
+
 export const loginUser = async (req, res) => {
   const { username, password } = req.body;
 
@@ -92,15 +95,13 @@ export const loginUser = async (req, res) => {
     let user = await User.findOne({ username });
 
     if (!user) {
-      return res
-        .status(400)
-        .json({ message: "Username or password is incorrect!" });
+      return res.status(400).json(errorObject);
     }
 
     // Check is the encrypted password matches
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Email or password incorrect" });
+      return res.status(400).json(errorObject);
     }
 
     // Return jwt
@@ -116,7 +117,7 @@ export const loginUser = async (req, res) => {
       { expiresIn: "30 days" },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ statusCode: 200, token });
       }
     );
   } catch (err) {

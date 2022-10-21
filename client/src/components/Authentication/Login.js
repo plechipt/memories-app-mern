@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
   CssBaseline,
   Container,
@@ -12,18 +14,42 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
+import { login } from "../../redux/actionCreators/users";
 
 export default function Login() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.users);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [failedToLogin, setFailedToLogin] = useState(false);
+
+  useEffect(() => {
+    const { statusCode, token } = user;
+
+    if (statusCode === 400) {
+      setFailedToLogin(true);
+      setPassword("");
+    } else if (statusCode === 200) {
+      localStorage.setItem("token", token);
+
+      clearForm();
+      setFailedToLogin(false);
+    }
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(login({ username, password }));
+  };
+
+  const clearForm = () => {
+    setUsername("");
+    setPassword("");
   };
 
   return (
@@ -57,6 +83,8 @@ export default function Login() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={failedToLogin}
+                helperText={failedToLogin ? user.message : null}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
