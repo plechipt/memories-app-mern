@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { register } from "../actionCreators/users";
 
 export const userSlice = createSlice({
   name: "counter",
@@ -6,6 +7,16 @@ export const userSlice = createSlice({
     user: {},
     status: "idle",
     error: null,
+  },
+  extraReducers: {
+    [register.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.user = action.payload;
+    },
+    [register.rejected]: (state, action) => {
+      state.status = "error";
+      state.user = action.payload;
+    },
   },
 });
 

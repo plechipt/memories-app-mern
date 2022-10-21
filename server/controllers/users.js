@@ -27,7 +27,7 @@ export const authMiddleware = (req, res, next) => {
   }
 };
 
-export const getUsers = async (req, res) => {
+export const getAllUsers = async (req, res) => {
   try {
     const allUsers = await User.find();
 
@@ -45,7 +45,11 @@ export const registerUser = async (req, res) => {
     let user = await User.findOne({ username });
 
     if (user) {
-      return res.status(400).json({ msg: "This username already exists!" });
+      return res.status(400).json({
+        statusCode: 400,
+        errorType: 1,
+        message: "This username already exists!",
+      });
     }
 
     // Create new user
@@ -72,11 +76,10 @@ export const registerUser = async (req, res) => {
       { expiresIn: "7 days" },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ statusCode: 200, token });
       }
     );
   } catch (err) {
-    console.error(err.message);
     res.status(500).send("Server error");
   }
 };
@@ -91,13 +94,13 @@ export const loginUser = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ msg: "Username or password is incorrect!" });
+        .json({ message: "Username or password is incorrect!" });
     }
 
     // Check is the encrypted password matches
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Email or password incorrect" });
+      return res.status(400).json({ message: "Email or password incorrect" });
     }
 
     // Return jwt
@@ -126,7 +129,6 @@ export const getInfo = async (req, res) => {
   const { _id } = req.body;
 
   try {
-    console.log("test");
     const user = await User.findById(_id).select("-password");
     res.status(200).json({ user });
   } catch (error) {

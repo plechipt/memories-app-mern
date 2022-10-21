@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
@@ -22,14 +22,54 @@ export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { user } = useSelector((state) => state.users);
+
+  // Data has been send back from server
+  useEffect(() => {
+    console.log(user);
+    if (user.statusCode === 400) {
+      if (user.errorType === 1) {
+        setUsernameAlreadyExists(true);
+      }
+    }
+    if (user.statusCode === 200) {
+      clearForm();
+      resetErrors();
+      navigate("/login");
+    }
+  }, [user]);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [passwordsDontMatch, setPasswordsDontMatch] = useState(false);
+  const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (password !== confirmPassword) {
+      setPassword("");
+      setConfirmPassword("");
+      setPasswordsDontMatch(true);
+
+      return;
+    }
+
+    setPasswordsDontMatch(false);
     dispatch(register({ username, password }));
+  };
+
+  const clearForm = () => {
+    setUsername("");
+    setPassword("");
+    setConfirmPassword("");
+  };
+
+  const resetErrors = () => {
+    setPasswordsDontMatch(false);
+    setUsernameAlreadyExists(false);
   };
 
   return (
@@ -53,6 +93,8 @@ export default function Register() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                error={usernameAlreadyExists}
+                helperText={usernameAlreadyExists ? user.message : null}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -75,11 +117,13 @@ export default function Register() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={passwordsDontMatch}
+                helperText={passwordsDontMatch ? "Passwords don't match" : null}
+                label="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 fullWidth
-                label="Confirm Password"
                 name="password"
                 type="password"
                 autoComplete="new-password"

@@ -1,7 +1,7 @@
 import express from "express";
 import {
   authMiddleware,
-  getUsers,
+  getAllUsers,
   registerUser,
   loginUser,
   getInfo,
@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.get("/", getUsers);
+router.get("/", getAllUsers);
 router.post("/", registerUser);
 router.post("/login", loginUser);
 router.get("/info", authMiddleware, getInfo);
