@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+
 import {
+  Grow,
   CssBaseline,
   Container,
   Avatar,
@@ -54,72 +56,78 @@ export default function Login() {
   };
 
   return (
-    <Container className={classes.mainContainer} component="main" maxWidth="sm">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+    <Grow in>
+      <Container
+        className={classes.mainContainer}
+        component="main"
+        maxWidth="sm"
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box onSubmit={handleSubmit} component="form" sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                fullWidth
-                label="Username"
-                name="username"
-              />
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box onSubmit={handleSubmit} component="form" sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  fullWidth
+                  label="Username"
+                  name="username"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  error={failedToLogin}
+                  helperText={failedToLogin ? user.message : null}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  fullWidth
+                  label="Password"
+                  name="password"
+                  type="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                error={failedToLogin}
-                helperText={failedToLogin ? user.message : null}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                fullWidth
-                label="Password"
-                name="password"
-                type="password"
-                autoComplete="new-password"
-              />
-            </Grid>
-          </Grid>
 
-          <Button
-            type="submit"
-            className={classes.submitButton}
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
-          <Grid
-            className={classes.bottomText}
-            container
-            justifyContent="flex-end"
-          >
-            <Grid item>
-              <Link component="button" onClick={() => navigate("/register")}>
-                Don't have an account? Sign Up
-              </Link>
+            <Button
+              type="submit"
+              className={classes.submitButton}
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid
+              className={classes.bottomText}
+              container
+              justifyContent="flex-end"
+            >
+              <Grid item>
+                <Link component="button" onClick={() => navigate("/register")}>
+                  Don't have an account? Sign Up
+                </Link>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Grow>
   );
 }

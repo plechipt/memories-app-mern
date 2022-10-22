@@ -5,14 +5,15 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Login from "./components/Authentication/Login";
 import Register from "./components/Authorization/Register";
-import GuestGuard from "./components/Auth/GuestGuard";
-import UserGuard from "./components/Auth/UserGuard";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
 function App() {
   return (
     <Container maxWidth="xl">
       <Routes>
-        <Route path="/" exact element={<Home />} />
+        <Route exact path="/" element={<ProtectedRoute />}>
+          <Route exact path="/" element={<Home />} />
+        </Route>
         <Route path="/login" exact element={<Login />} />
         <Route path="/register" exact element={<Register />} />
       </Routes>
