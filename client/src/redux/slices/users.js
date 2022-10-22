@@ -3,6 +3,7 @@ import { register, login } from "../actionCreators/users";
 
 const initialState = {
   user: {},
+  isAuthenticated: false,
   status: "idle",
   error: null,
 };
@@ -26,6 +27,8 @@ export const userSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.status = "succeeded";
+
+      state.isAuthenticated = true;
       state.user = action.payload;
     },
     [login.rejected]: (state, action) => {

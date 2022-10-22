@@ -3,6 +3,7 @@ import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 
 import useStyles from "../Home/styles";
 import memories from "../../images/memories.png";
+
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
 

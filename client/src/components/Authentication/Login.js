@@ -39,6 +39,7 @@ export default function Login() {
 
       clearForm();
       setFailedToLogin(false);
+      navigate("/");
     }
   }, [user]);
 

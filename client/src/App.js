@@ -5,6 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Login from "./components/Authentication/Login";
 import Register from "./components/Authorization/Register";
+import GuestGuard from "./components/Auth/GuestGuard";
+import UserGuard from "./components/Auth/UserGuard";
 
 function App() {
   return (
