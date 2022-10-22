@@ -1,6 +1,6 @@
 import express from "express";
+import { authMiddleware } from "../middleware/auth.js";
 import {
-  authMiddleware,
   getAllUsers,
   registerUser,
   loginUser,
