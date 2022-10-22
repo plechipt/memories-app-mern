@@ -2,10 +2,10 @@ import React from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 
 import useStyles from "../Home/styles";
-import memories from "../../images/memories.png";
 
-import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
+import Posts from "../Posts/Posts";
+import Navbar from "../Navbar/Navbar";
 
 const Home = () => {
   const classes = useStyles();
@@ -13,17 +13,7 @@ const Home = () => {
   return (
     <Grow in>
       <Container>
-        <AppBar className={classes.appBar} position="static" color="inherit">
-          <Typography className={classes.heading} variant="h2" align="center">
-            Memories
-            <img
-              className={classes.image}
-              src={memories}
-              alt="memories"
-              height="60"
-            />
-          </Typography>
-        </AppBar>
+        <Navbar />
         <Grow in>
           <Container>
             <Grid
