@@ -22,5 +22,6 @@ export const likePost = (likedPost) =>
   API.patch(`posts/${likedPost._id}/likePost`, likedPost);
 
 // Users
-export const register = (user) => axios.post(`/users`, user);
-export const login = (user) => axios.post(`/users/login`, user);
+export const register = (user) => API.post(`/users`, user);
+export const login = (user) => API.post(`/users/login`, user);
+export const checkUser = () => API.get(`/users/checkUser`);

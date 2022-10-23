@@ -26,3 +26,12 @@ export const login = createAsyncThunk(
     }
   }
 );
+
+export const checkUser = createAsyncThunk("users/checkUser", async () => {
+  try {
+    const { data } = await api.checkUser();
+    console.log("first");
+
+    return data;
+  } catch ({ response: { data } }) {}
+});

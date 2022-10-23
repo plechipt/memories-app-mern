@@ -1,5 +1,6 @@
-import React from "react";
-import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Container, Grow, Grid } from "@material-ui/core";
 
 import useStyles from "../Home/styles";
 
