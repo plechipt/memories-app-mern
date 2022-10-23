@@ -1,42 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import { GoogleLogin as GoogleButton } from "react-google-login";
+import { useGoogleLogin } from "@react-oauth/google";
 
 import useStyles from "./styles";
 import Icon from "./Icon";
 
 const GoogleLogin = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
 
-  const googleSuccess = async (res) => {
-    console.log(res);
-  };
-  const googleFailure = (error) => {
-    console.log(error);
-    console.log("Google Sign In failed. Try again later");
+  const handleLogin = () => {
+    setIsLoading(true);
+    login();
   };
 
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      console.log(tokenResponse);
+      setIsLoading(false);
+    },
+    onError: () => console.log("Login Failed. Try again later"),
+  });
+
   return (
-    <GoogleButton
-      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-      render={(renderProps) => (
-        <Button
-          className={classes.googleButton}
-          color="primary"
-          variant="contained"
-          fullWidth
-          onClick={renderProps.onClick}
-          disabled={renderProps.disabled}
-          startIcon={<Icon />}
-        >
-          Google Sign In
-        </Button>
-      )}
-      buttonText="Login"
-      onSuccess={googleSuccess}
-      onFailure={googleFailure}
-      cookiePolicy={"single_host_origin"}
-    />
+    <Button
+      onClick={() => handleLogin()}
+      className={classes.googleButton}
+      color="primary"
+      fullWidth
+      disabled={isLoading}
+      startIcon={<Icon />}
+      variant="contained"
+    >
+      Google Sign In
+    </Button>
   );
 };
 
