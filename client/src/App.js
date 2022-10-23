@@ -7,10 +7,16 @@ import Home from "./components/Home/Home";
 import Login from "./components/Authentication/Login";
 import Register from "./components/Authorization/Register";
 import { checkUser } from "./redux/actionCreators/users";
+import { turnOnLoading } from "./redux/slices/users";
 
 function App() {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    dispatch(turnOnLoading());
+    dispatch(checkUser());
+  }, [isAuthenticated]);
 
   return (
     <Container maxWidth="xl">

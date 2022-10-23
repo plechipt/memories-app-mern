@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 export const authMiddleware = (req, res, next) => {
   try {
     // Get token from header
-    console.log("objectet");
     const token = req.headers.authorization.split(" ")[1];
 
     let decodedData;

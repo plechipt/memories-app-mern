@@ -101,6 +101,34 @@ export const loginUser = async (req, res) => {
   }
 };
 
+export const verifyToken = async (req, res) => {
+  try {
+    // Get token from header
+    const token = req.headers.authorization.split(" ")[1];
+
+    // If the token is present
+    if (token) {
+      // Verify the token using jwt.verify method
+      const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+
+      // Return response with decoded data
+      res.json({
+        isAuthenticated: true,
+        data: decodedData,
+      });
+    } else {
+      // Return response with error
+      res.json({
+        isAuthenticated: false,
+        data: "error",
+      });
+    }
+  } catch (err) {
+    console.error("Something went wrong");
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
 export const getInfo = async (req, res) => {
   const { _id } = req.body;
 

@@ -29,8 +29,8 @@ export const login = createAsyncThunk(
 
 export const checkUser = createAsyncThunk("users/checkUser", async () => {
   try {
+    console.log("now");
     const { data } = await api.checkUser();
-    console.log("first");
 
     return data;
   } catch ({ response: { data } }) {}

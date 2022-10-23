@@ -3,6 +3,7 @@ import { register, login, checkUser } from "../actionCreators/users";
 
 const initialState = {
   user: {},
+  isLoading: false,
   isAuthenticated: false,
   status: "idle",
   error: null,
@@ -14,6 +15,9 @@ export const userSlice = createSlice({
     ...initialState,
   },
   reducers: {
+    turnOnLoading: (state) => {
+      state.isLoading = true;
+    },
     resetUser: () => initialState,
   },
   extraReducers: {
@@ -36,11 +40,17 @@ export const userSlice = createSlice({
       state.status = "error";
       state.user = action.payload;
     },
+    /*
+    [checkUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    */
     [checkUser.fulfilled]: (state, action) => {
-      console.log("test");
+      state.isAuthenticated = action.payload.isAuthenticated;
+      state.isLoading = false;
     },
   },
 });
 
-export const { resetUser } = userSlice.actions;
+export const { resetUser, turnOnLoading } = userSlice.actions;
 export default userSlice.reducer;
