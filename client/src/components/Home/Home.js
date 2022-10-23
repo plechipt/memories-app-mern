@@ -5,7 +5,6 @@ import useStyles from "../Home/styles";
 
 import Form from "../Form/Form";
 import Posts from "../Posts/Posts";
-import Navbar from "../Navbar/Navbar";
 
 const Home = () => {
   const classes = useStyles();
@@ -13,7 +12,6 @@ const Home = () => {
   return (
     <Grow in>
       <Container>
-        <Navbar />
         <Grow in>
           <Container>
             <Grid

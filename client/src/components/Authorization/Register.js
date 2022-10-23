@@ -9,7 +9,6 @@ import {
   Avatar,
   Button,
   TextField,
-  Link,
   Grid,
   Box,
   Typography,
@@ -155,13 +154,7 @@ export default function Register() {
               className={classes.bottomText}
               container
               justifyContent="flex-end"
-            >
-              <Grid item>
-                <Link component="button" onClick={() => navigate("/login")}>
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
+            ></Grid>
           </Box>
         </Box>
       </Container>

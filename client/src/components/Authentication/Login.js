@@ -9,7 +9,6 @@ import {
   Container,
   Avatar,
   Button,
-  Link,
   TextField,
   Grid,
   Box,
@@ -118,13 +117,7 @@ export default function Login() {
               className={classes.bottomText}
               container
               justifyContent="flex-end"
-            >
-              <Grid item>
-                <Link component="button" onClick={() => navigate("/register")}>
-                  Don't have an account? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
+            ></Grid>
           </Box>
         </Box>
       </Container>

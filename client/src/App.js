@@ -6,6 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Login from "./components/Authentication/Login";
 import Register from "./components/Authorization/Register";
+import Navbar from "./components//Navbar/Navbar";
+
 import { checkUser } from "./redux/actionCreators/users";
 import { turnOnLoading } from "./redux/slices/users";
 
@@ -19,7 +21,8 @@ function App() {
   }, [isAuthenticated]);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
+      <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/login" exact element={<Login />} />
