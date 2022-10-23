@@ -7,10 +7,13 @@ export default makeStyles((theme) => ({
     backgroundColor: "white",
     borderRadius: "10px",
   },
-  submitButton: {
-    marginTop: "1em",
-  },
   bottomText: {
     marginTop: "1em",
+  },
+  buttonsContainer: {
+    marginTop: theme.spacing(3),
+  },
+  submitButton: {
+    marginBottom: theme.spacing(2),
   },
 }));

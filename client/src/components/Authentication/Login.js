@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
   Grow,
   CssBaseline,
@@ -17,6 +17,8 @@ import {
 
 import useStyles from "./styles";
 import { login } from "../../redux/actionCreators/users";
+
+import GoogleLogin from "./GoogleLogin";
 
 export default function Login() {
   const classes = useStyles();
@@ -103,16 +105,18 @@ export default function Login() {
                 />
               </Grid>
             </Grid>
-
-            <Button
-              type="submit"
-              className={classes.submitButton}
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
+            <div className={classes.buttonsContainer}>
+              <Button
+                type="submit"
+                className={classes.submitButton}
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <GoogleLogin />
+            </div>
             <Grid
               className={classes.bottomText}
               container
