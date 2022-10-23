@@ -81,7 +81,7 @@ const Post = ({ post }) => {
         <Button size="small" color="primary" onClick={handleOnLike}>
           <ThumbUpAltIcon fontSize="small" />
           <Box mr={1}>Like</Box>
-          {post.likeCount}
+          {post.likes}
         </Button>
         <Button size="small" color="primary" onClick={handleOnDelete}>
           <DeleteIcon fontSize="small" />

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { register, login, checkUser } from "../actionCreators/users";
 
 const initialState = {
-  user: {},
+  user: undefined,
   isLoading: false,
   isAuthenticated: false,
   status: "idle",
@@ -40,13 +40,14 @@ export const userSlice = createSlice({
       state.status = "error";
       state.user = action.payload;
     },
-    /*
     [checkUser.pending]: (state) => {
       state.isLoading = true;
     },
-    */
     [checkUser.fulfilled]: (state, action) => {
-      state.isAuthenticated = action.payload.isAuthenticated;
+      const { isAuthenticated, user } = action.payload;
+
+      state.user = user;
+      state.isAuthenticated = isAuthenticated;
       state.isLoading = false;
     },
   },

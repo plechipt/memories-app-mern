@@ -144,8 +144,9 @@ export default function Register() {
             <Button
               className={classes.submitButton}
               type="submit"
-              fullWidth
               variant="contained"
+              color="primary"
+              fullWidth
               sx={{ mt: 3, mb: 2 }}
             >
               Sign Up

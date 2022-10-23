@@ -72,7 +72,7 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -107,10 +107,11 @@ export default function Login() {
             </Grid>
             <div className={classes.buttonsContainer}>
               <Button
-                type="submit"
                 className={classes.submitButton}
-                fullWidth
+                type="submit"
                 variant="contained"
+                color="primary"
+                fullWidth
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign In

@@ -101,6 +101,8 @@ export const loginUser = async (req, res) => {
   }
 };
 
+const notAuthenticated = { isAuthenticated: false, user: null };
+
 export const verifyToken = async (req, res) => {
   try {
     // Get token from header
@@ -110,22 +112,20 @@ export const verifyToken = async (req, res) => {
     if (token) {
       // Verify the token using jwt.verify method
       const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+      const userId = decodedData.user.id;
+      const username = (await User.findOne({ id: userId })).username;
 
       // Return response with decoded data
       res.json({
         isAuthenticated: true,
-        data: decodedData,
+        user: { userId, username },
       });
     } else {
       // Return response with error
-      res.json({
-        isAuthenticated: false,
-        data: "error",
-      });
+      res.json(notAuthenticated);
     }
   } catch (err) {
-    console.error("Something went wrong");
-    res.status(500).json({ message: "Server Error" });
+    res.json(notAuthenticated);
   }
 };
 
