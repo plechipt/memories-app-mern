@@ -27,8 +27,10 @@ export const login = createAsyncThunk(
   }
 );
 
+/*
 export const checkUser = createAsyncThunk("users/checkUser", async () => {
   const { data } = await api.checkUser();
 
   return data;
 });
+*/

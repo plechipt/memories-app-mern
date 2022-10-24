@@ -1,8 +1,10 @@
+import jwt_decode from "jwt-decode";
 import { createSlice } from "@reduxjs/toolkit";
-import { register, login, checkUser } from "../actionCreators/users";
+
+import { register, login } from "../actionCreators/users";
 
 const initialState = {
-  user: undefined,
+  user: {},
   isLoading: false,
   isAuthenticated: false,
   status: "idle",
@@ -15,10 +17,24 @@ export const userSlice = createSlice({
     ...initialState,
   },
   reducers: {
-    turnOnLoading: (state) => {
-      state.isLoading = true;
-    },
     resetUser: () => initialState,
+    checkUser: (state) => {
+      const token = localStorage.token;
+
+      if (token) {
+        try {
+          const decoded = jwt_decode(token);
+
+          // JWT succesfully decoded
+          state.isAuthenticated = true;
+          state.user = decoded.user;
+        } catch (err) {
+          state.isAuthenticated = false;
+        }
+      }
+
+      state.isAuthenticated = false;
+    },
   },
   extraReducers: {
     [register.fulfilled]: (state, action) => {
@@ -40,18 +56,8 @@ export const userSlice = createSlice({
       state.status = "error";
       state.user = action.payload;
     },
-    [checkUser.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [checkUser.fulfilled]: (state, action) => {
-      const { isAuthenticated, user } = action.payload;
-
-      state.user = user;
-      state.isAuthenticated = isAuthenticated;
-      state.isLoading = false;
-    },
   },
 });
 
-export const { resetUser, turnOnLoading } = userSlice.actions;
+export const { resetUser, turnOnLoading, checkUser } = userSlice.actions;
 export default userSlice.reducer;

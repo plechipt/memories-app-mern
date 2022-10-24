@@ -8,8 +8,7 @@ import Login from "./components/Authentication/Login";
 import Register from "./components/Authorization/Register";
 import Navbar from "./components//Navbar/Navbar";
 
-import { checkUser } from "./redux/actionCreators/users";
-import { turnOnLoading } from "./redux/slices/users";
+import { checkUser } from "./redux/slices/users";
 
 function App() {
   const dispatch = useDispatch();
