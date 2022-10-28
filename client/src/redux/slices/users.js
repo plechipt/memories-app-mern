@@ -1,7 +1,7 @@
 import jwt_decode from "jwt-decode";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { register, login } from "../actionCreators/users";
+import { register, login, logout } from "../actionCreators/users";
 
 const initialState = {
   user: undefined,
@@ -27,8 +27,6 @@ export const userSlice = createSlice({
       if (token) {
         try {
           const decoded = jwt_decode(token);
-
-          console.log(decoded);
 
           // JWT succesfully decoded
           state.isAuthenticated = true;
@@ -65,6 +63,12 @@ export const userSlice = createSlice({
     [login.rejected]: (state, action) => {
       state.status = "error";
       state.user = action.payload;
+    },
+    [logout.fulfilled]: (state) => {
+      state.status = "succeeded";
+
+      state.isAuthenticated = false;
+      state.user = undefined;
     },
   },
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   AppBar,
@@ -13,12 +13,18 @@ import {
 
 import useStyles from "./styles";
 import memories from "../../images/memories.png";
+import { logout } from "../../redux/actionCreators/users";
 
 const Navbar = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { isAuthenticated, user, isLoading } = useSelector(
     (state) => state.users
   );
+
+  const handleOnLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
@@ -50,10 +56,11 @@ const Navbar = () => {
               >
                 {user.username.charAt(0)}
               </Avatar>
-              <Typography classes={classes.username} variant="h6">
+              <Typography className={classes.username} variant="h6">
                 {user.username}
               </Typography>
               <Button
+                onClick={handleOnLogout}
                 variant="contained"
                 className={classes.logout}
                 color="secondary"
