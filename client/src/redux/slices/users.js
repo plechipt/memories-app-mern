@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { register, login } from "../actionCreators/users";
 
 const initialState = {
-  user: {},
+  user: undefined,
   isLoading: false,
   isAuthenticated: false,
   status: "idle",
@@ -18,6 +18,9 @@ export const userSlice = createSlice({
   },
   reducers: {
     resetUser: () => initialState,
+    turnOnLoading: (state) => {
+      state.isLoading = true;
+    },
     checkUser: (state) => {
       const token = localStorage.token;
 
@@ -25,15 +28,23 @@ export const userSlice = createSlice({
         try {
           const decoded = jwt_decode(token);
 
+          console.log(decoded);
+
           // JWT succesfully decoded
           state.isAuthenticated = true;
           state.user = decoded.user;
         } catch (err) {
-          state.isAuthenticated = false;
-        }
-      }
+          // Delete token
+          localStorage.removeItem("token");
 
-      state.isAuthenticated = false;
+          state.isAuthenticated = false;
+          state.user = null;
+        }
+      } else {
+        state.isAuthenticated = false;
+        state.user = null;
+      }
+      state.isLoading = false;
     },
   },
   extraReducers: {
@@ -47,7 +58,6 @@ export const userSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.isAuthenticated = true;
 
       state.isAuthenticated = true;
       state.user = action.payload;

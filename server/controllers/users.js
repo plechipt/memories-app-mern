@@ -42,6 +42,7 @@ export const registerUser = async (req, res) => {
     const payload = {
       user: {
         id: user.id,
+        username: user.username,
       },
     };
 
@@ -79,20 +80,23 @@ export const loginUser = async (req, res) => {
       return res.status(400).json(errorObject);
     }
 
+    const id = user.id;
+
     // Return jwt
     const payload = {
       user: {
-        id: user.id,
+        id,
+        username,
       },
     };
 
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
-      { expiresIn: "30 days" },
+      { expiresIn: "7 days" },
       (err, token) => {
         if (err) throw err;
-        res.json({ statusCode: 200, token });
+        res.json({ statusCode: 200, token, username, id });
       }
     );
   } catch (err) {

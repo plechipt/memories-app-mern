@@ -8,13 +8,14 @@ import Login from "./components/Authentication/Login";
 import Register from "./components/Authorization/Register";
 import Navbar from "./components//Navbar/Navbar";
 
-import { checkUser } from "./redux/slices/users";
+import { turnOnLoading, checkUser } from "./redux/slices/users";
 
 function App() {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.users);
 
   useEffect(() => {
+    dispatch(turnOnLoading());
     dispatch(checkUser());
   }, [isAuthenticated]);
 

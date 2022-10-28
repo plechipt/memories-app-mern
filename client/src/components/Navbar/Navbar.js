@@ -16,13 +16,9 @@ import memories from "../../images/memories.png";
 
 const Navbar = () => {
   const classes = useStyles();
-  const {
-    isAuthenticated,
-    user: testUser,
-    isLoading,
-  } = useSelector((state) => state.users);
-
-  const user = null;
+  const { isAuthenticated, user, isLoading } = useSelector(
+    (state) => state.users
+  );
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
@@ -45,7 +41,7 @@ const Navbar = () => {
       </div>
       {isLoading === false ? (
         <Toolbar className={classes.toolbar}>
-          {user ? (
+          {user !== null && user !== undefined && isAuthenticated ? (
             <div className={classes.profile}>
               <Avatar
                 className={classes.purple}

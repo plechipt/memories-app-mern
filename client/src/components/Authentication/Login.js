@@ -32,17 +32,19 @@ export default function Login() {
   const [failedToLogin, setFailedToLogin] = useState(false);
 
   useEffect(() => {
-    const { statusCode, token } = user;
+    if (user) {
+      const { statusCode, token } = user;
 
-    if (statusCode === 400) {
-      setFailedToLogin(true);
-      setPassword("");
-    } else if (statusCode === 200) {
-      localStorage.setItem("token", token);
+      if (statusCode === 400) {
+        setFailedToLogin(true);
+        setPassword("");
+      } else if (statusCode === 200) {
+        localStorage.setItem("token", token);
 
-      clearForm();
-      setFailedToLogin(false);
-      navigate("/");
+        clearForm();
+        setFailedToLogin(false);
+        navigate("/");
+      }
     }
   }, [user]);
 
