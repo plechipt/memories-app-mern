@@ -1,10 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import {
-  Box,
   Card,
   CardActions,
   CardContent,
@@ -12,14 +11,15 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-import moment from "moment";
 
 import useStyles from "./styles";
 import { fillForm } from "../../../redux/slices/forms";
 import { deletePost, likePost } from "../../../redux/actionCreators/posts";
+import Likes from "./Likes";
 
 const Post = ({ post }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.users);
   const defaultImage = process.env.REACT_APP_DEFAULT_IMAGE;
 
   const handleOnUpdate = () => {
@@ -78,10 +78,13 @@ const Post = ({ post }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={handleOnLike}>
-          <ThumbUpAltIcon fontSize="small" />
-          <Box mr={1}>Like</Box>
-          {post.likes}
+        <Button
+          size="small"
+          color="primary"
+          disabled={!user}
+          onClick={handleOnLike}
+        >
+          <Likes post={post} />
         </Button>
         <Button size="small" color="primary" onClick={handleOnDelete}>
           <DeleteIcon fontSize="small" />
