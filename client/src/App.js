@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container } from "@material-ui/core";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import Home from "./components/Home/Home";
 import Login from "./components/Authentication/Login";
@@ -13,7 +13,7 @@ import { turnOnLoading, checkUser } from "./redux/slices/users";
 
 function App() {
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.users);
+  const { isAuthenticated, user } = useSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(turnOnLoading());
@@ -25,8 +25,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" exact element={<Login />} />
+        <Route path="/register" exact element={<Register />} />
       </Routes>
     </Container>
   );

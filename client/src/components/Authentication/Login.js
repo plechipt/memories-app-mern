@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import {
+  InputAdornment,
   Grow,
   CssBaseline,
   Container,
@@ -90,6 +92,13 @@ export default function Login() {
                   fullWidth
                   label="Username"
                   name="username"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountCircleOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -104,6 +113,13 @@ export default function Login() {
                   name="password"
                   type="password"
                   autoComplete="new-password"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LockOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </Grid>
             </Grid>
