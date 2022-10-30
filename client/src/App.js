@@ -7,6 +7,7 @@ import Home from "./components/Home/Home";
 import Login from "./components/Authentication/Login";
 import Register from "./components/Authorization/Register";
 import Navbar from "./components//Navbar/Navbar";
+import AuthRoute from "./components/Auth/AuthRoute";
 
 import { turnOnLoading, checkUser } from "./redux/slices/users";
 
@@ -24,8 +25,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/register" exact element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Container>
   );

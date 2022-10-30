@@ -2,10 +2,10 @@ import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ProtectedRoute = ({ component: Component }) => {
+const AuthRoute = () => {
   const { isAuthenticated } = useSelector((state) => state.users);
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
 };
 
-export default ProtectedRoute;
+export default AuthRoute;
