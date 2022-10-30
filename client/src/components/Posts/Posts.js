@@ -16,7 +16,7 @@ const Posts = () => {
     dispatch(fetchPosts());
   }, []);
 
-  return !posts.length ? (
+  return !posts.length && posts.length !== 0 ? (
     <CircularProgress color="primary" />
   ) : (
     <Grid

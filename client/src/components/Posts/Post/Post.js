@@ -35,6 +35,9 @@ const Post = ({ post }) => {
   };
 
   const classes = useStyles();
+
+  console.log(post);
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -49,15 +52,17 @@ const Post = ({ post }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button
-          style={{ color: "white" }}
-          size="small"
-          onClick={() => {
-            handleOnUpdate();
-          }}
-        >
-          <MoreHorizIcon fontSize="medium" />
-        </Button>
+        {user && user.id === post.userId && (
+          <Button
+            style={{ color: "white" }}
+            size="small"
+            onClick={() => {
+              handleOnUpdate();
+            }}
+          >
+            <MoreHorizIcon fontSize="medium" />
+          </Button>
+        )}
       </div>
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
@@ -86,10 +91,12 @@ const Post = ({ post }) => {
         >
           <Likes post={post} />
         </Button>
-        <Button size="small" color="primary" onClick={handleOnDelete}>
-          <DeleteIcon fontSize="small" />
-          Delete
-        </Button>
+        {user && user.id === post.userId && (
+          <Button size="small" color="primary" onClick={handleOnDelete}>
+            <DeleteIcon fontSize="small" />
+            Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
