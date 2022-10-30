@@ -13,7 +13,6 @@ const Form = () => {
   const [formIsInUpdateMode, setFormIsInUpdateMode] = useState(false);
 
   const [formData, setFormData] = useState({
-    creator: "",
     title: "",
     text: "",
     tags: "",
@@ -48,7 +47,6 @@ const Form = () => {
   const clear = () => {
     setFormIsInUpdateMode(false);
     setFormData({
-      creator: "",
       title: "",
       text: "",
       tags: "",
@@ -68,16 +66,6 @@ const Form = () => {
           {formIsInUpdateMode ? "Updating" : "Creating"} a memory
         </Typography>
         <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={formData.creator}
-          onChange={(e) =>
-            setFormData({ ...formData, creator: e.target.value })
-          }
-        ></TextField>
-        <TextField
           name="title"
           variant="outlined"
           label="Title"
@@ -92,6 +80,8 @@ const Form = () => {
           fullWidth
           value={formData.text}
           onChange={(e) => setFormData({ ...formData, text: e.target.value })}
+          multiline
+          minRows={5}
         ></TextField>
         <TextField
           name="tags"
@@ -103,7 +93,6 @@ const Form = () => {
             setFormData({ ...formData, tags: e.target.value.split(",") })
           }
         ></TextField>
-
         <div className={classes.fileInput}>
           <FileBase
             type="file"

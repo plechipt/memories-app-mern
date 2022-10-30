@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Container, Grow, Grid } from "@material-ui/core";
 
 import useStyles from "../Home/styles";
@@ -7,6 +8,7 @@ import Form from "../Form/Form";
 import Posts from "../Posts/Posts";
 
 const Home = () => {
+  const { isAuthenticated } = useSelector((state) => state.users);
   const classes = useStyles();
 
   return (
@@ -25,7 +27,7 @@ const Home = () => {
                 <Posts />
               </Grid>
               <Grid className={classes.gridContainer} item md={12} lg={4}>
-                <Form />
+                {isAuthenticated && <Form />}
               </Grid>
             </Grid>
           </Container>
