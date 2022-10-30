@@ -1,7 +1,7 @@
 import jwt_decode from "jwt-decode";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { register, login, logout } from "../actionCreators/users";
+import { register, login, googleLogin, logout } from "../actionCreators/users";
 
 const initialState = {
   user: undefined,
@@ -29,8 +29,14 @@ export const userSlice = createSlice({
           const decoded = jwt_decode(token);
 
           // JWT succesfully decoded
+          // Logged in using google auth
           state.isAuthenticated = true;
-          state.user = decoded.user;
+
+          if (decoded.iss) {
+            state.user = { id: decoded.sub, username: decoded.name };
+          } else {
+            state.user = decoded.user;
+          }
         } catch (err) {
           // Delete token
           localStorage.removeItem("token");
@@ -47,26 +53,23 @@ export const userSlice = createSlice({
   },
   extraReducers: {
     [register.fulfilled]: (state, action) => {
-      state.status = "succeeded";
       state.user = action.payload;
     },
     [register.rejected]: (state, action) => {
-      state.status = "error";
       state.user = action.payload;
     },
     [login.fulfilled]: (state, action) => {
-      state.status = "succeeded";
-
       state.isAuthenticated = true;
       state.user = action.payload;
     },
     [login.rejected]: (state, action) => {
-      state.status = "error";
+      state.user = action.payload;
+    },
+    [googleLogin.fulfilled]: (state, action) => {
+      state.isAuthenticated = true;
       state.user = action.payload;
     },
     [logout.fulfilled]: (state) => {
-      state.status = "succeeded";
-
       state.isAuthenticated = false;
       state.user = undefined;
     },

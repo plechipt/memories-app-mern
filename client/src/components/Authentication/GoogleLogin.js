@@ -1,39 +1,43 @@
-import React, { useState } from "react";
-import { Button } from "@material-ui/core";
-import { useGoogleLogin } from "@react-oauth/google";
+import React from "react";
+import jwt_decode from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { GoogleLogin as GoogleLoginButton } from "@react-oauth/google";
 
 import useStyles from "./styles";
-import Icon from "./Icon";
+import { googleLogin } from "../../redux/actionCreators/users";
 
 const GoogleLogin = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    setIsLoading(true);
-    login();
+  const handleLogin = (codeResponse) => {
+    const { credential } = codeResponse;
+    const decoded = jwt_decode(credential);
+
+    const { sub, name } = decoded;
+
+    const loginData = {
+      id: sub,
+      username: name,
+      token: credential,
+      statusCode: 200,
+    };
+
+    dispatch(googleLogin(loginData));
+    navigate("/");
   };
 
-  const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      console.log(tokenResponse);
-      setIsLoading(false);
-    },
-    onError: () => console.log("Login Failed. Try again later"),
-  });
-
   return (
-    <Button
-      onClick={() => handleLogin()}
-      className={classes.googleButton}
-      color="primary"
-      fullWidth
-      disabled={isLoading}
-      startIcon={<Icon />}
-      variant="contained"
-    >
-      Google Sign In
-    </Button>
+    <div className={classes.googleLoginButton}>
+      <GoogleLoginButton
+        onSuccess={handleLogin}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
+    </div>
   );
 };
 

@@ -27,6 +27,15 @@ export const login = createAsyncThunk(
   }
 );
 
+export const googleLogin = createAsyncThunk(
+  "users/googleLogin",
+  async (data) => {
+    localStorage.setItem("token", data.token);
+
+    return data;
+  }
+);
+
 export const logout = createAsyncThunk("users/logout", async () => {
   localStorage.removeItem("token");
 });

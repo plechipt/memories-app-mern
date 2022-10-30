@@ -16,4 +16,10 @@ export default makeStyles((theme) => ({
   submitButton: {
     marginBottom: theme.spacing(2),
   },
+  googleLoginButton: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "auto",
+  },
 }));
