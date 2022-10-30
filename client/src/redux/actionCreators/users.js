@@ -30,12 +30,15 @@ export const login = createAsyncThunk(
 export const googleLogin = createAsyncThunk(
   "users/googleLogin",
   async (data) => {
-    localStorage.setItem("token", data.token);
+    const { token, picture } = data;
+
+    localStorage.setItem("token", token);
+    localStorage.setItem("profilePicture", picture);
 
     return data;
   }
 );
 
 export const logout = createAsyncThunk("users/logout", async () => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("token", "profilePicture");
 });

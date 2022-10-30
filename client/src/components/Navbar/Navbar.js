@@ -26,6 +26,8 @@ const Navbar = () => {
     dispatch(logout());
   };
 
+  const profilePicture = localStorage.profilePicture;
+
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
@@ -49,13 +51,17 @@ const Navbar = () => {
         <Toolbar className={classes.toolbar}>
           {user !== null && user !== undefined && isAuthenticated ? (
             <div className={classes.profile}>
-              <Avatar
-                className={classes.purple}
-                alt={user.username}
-                //src={user.result.imageUrl}
-              >
-                {user.username.charAt(0)}
-              </Avatar>
+              {profilePicture ? (
+                <Avatar
+                  className={classes.purple}
+                  alt={user.username}
+                  src={profilePicture}
+                />
+              ) : (
+                <Avatar className={classes.purple} alt={user.username}>
+                  {user.username.charAt(0)}
+                </Avatar>
+              )}
               <Typography className={classes.username} variant="h6">
                 {user.username}
               </Typography>

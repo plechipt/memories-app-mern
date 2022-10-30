@@ -16,11 +16,12 @@ const GoogleLogin = () => {
     const { credential } = codeResponse;
     const decoded = jwt_decode(credential);
 
-    const { sub, name } = decoded;
+    const { sub, name, picture } = decoded;
 
     const loginData = {
       id: sub,
       username: name,
+      picture: picture,
       token: credential,
       statusCode: 200,
     };
