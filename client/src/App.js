@@ -7,7 +7,7 @@ import Home from "./components/Home/Home";
 import Login from "./components/Authentication/Login";
 import Register from "./components/Authorization/Register";
 import Navbar from "./components//Navbar/Navbar";
-import AuthRoute from "./components/Auth/AuthRoute";
+import PostDetail from "./components/PostDetail/PostDetail";
 
 import { turnOnLoading, checkUser } from "./redux/slices/users";
 
@@ -21,11 +21,18 @@ function App() {
   }, [isAuthenticated]);
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/login" exact element={<Login />} />
+        <Route exact path="/" element={<Navigate to="/posts" />} />
+        <Route exact path="/posts" element={<Home />} />
+        <Route exact path="/posts/search" element={<Home />} />
+        <Route path="/posts/:id" element={<PostDetail />} />
+        <Route
+          path="/login"
+          exact
+          element={() => (!user ? <Login /> : <Navigate to="/posts" />)}
+        />
         <Route path="/register" exact element={<Register />} />
       </Routes>
     </Container>
