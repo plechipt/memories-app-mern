@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Container,
@@ -8,10 +8,12 @@ import {
   Paper,
   AppBar,
   TextField,
+  Button,
 } from "@material-ui/core";
 import ChipInput from "material-ui-chip-input";
 
 import useStyles from "../Home/styles";
+import { getPostsBySearch } from "../../redux/actionCreators/posts";
 
 import Form from "../Form/Form";
 import Posts from "../Posts/Posts";
@@ -26,6 +28,8 @@ const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const query = useQuery();
+
+  const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.users);
 
   const [search, setSearch] = useState("");
@@ -34,9 +38,17 @@ const Home = () => {
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
 
+  const searchPost = () => {
+    if (search.trim()) {
+      dispatch(getPostsBySearch({ search, tags: tags.join(", ") }));
+    } else {
+      navigate("/posts");
+    }
+  };
+
   const handleOnKeyPress = (e) => {
     if (e.keyCode === 13) {
-      // search post
+      searchPost();
     }
   };
 
@@ -80,6 +92,14 @@ const Home = () => {
                 label="Search Tags"
                 variant="outlined"
               />
+              <Button
+                onClick={searchPost}
+                className={classes.searchButton}
+                variant="contained"
+                color="primary"
+              >
+                Search
+              </Button>
             </AppBar>
             {isAuthenticated && <Form />}
             <Paper elevation={6}>

@@ -21,6 +21,13 @@ export const updatePost = (updatedPost) =>
 export const likePost = (likedPost) =>
   API.patch(`posts/${likedPost._id}/likePost`, likedPost);
 
+export const fetchPostsBySearch = (searchQuery) =>
+  API.get(
+    `/posts/search?searchQuery=${searchQuery.search || "none"}&tags=${
+      searchQuery.tags
+    }`
+  );
+
 // Users
 export const register = (user) => API.post("/users", user);
 export const login = (user) => API.post("/users/login", user);

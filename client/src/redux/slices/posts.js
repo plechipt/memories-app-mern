@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchPosts,
+  fetchPostsBySearch,
   addPost,
   updatePost,
   deletePost,

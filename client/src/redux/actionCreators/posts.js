@@ -11,6 +11,19 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   }
 });
 
+export const getPostsBySearch = createAsyncThunk(
+  "posts/search",
+  async (searchQuery) => {
+    try {
+      const { data } = await api.fetchPostsBySearch(searchQuery);
+
+      console.log(data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+);
+
 export const addPost = createAsyncThunk("posts/addPost", async (post) => {
   try {
     const { formData } = post;
