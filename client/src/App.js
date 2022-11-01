@@ -28,11 +28,7 @@ function App() {
         <Route exact path="/posts" element={<Home />} />
         <Route exact path="/posts/search" element={<Home />} />
         <Route path="/posts/:id" element={<PostDetail />} />
-        <Route
-          path="/login"
-          exact
-          element={() => (!user ? <Login /> : <Navigate to="/posts" />)}
-        />
+        <Route path="/login" exact element={<Login />} />
         <Route path="/register" exact element={<Register />} />
       </Routes>
     </Container>

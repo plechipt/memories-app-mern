@@ -56,6 +56,7 @@ const Navbar = () => {
                   className={classes.purple}
                   alt={user.username}
                   src={profilePicture}
+                  referrerPolicy="no-referrer"
                 />
               ) : (
                 <Avatar className={classes.purple} alt={user.username}>
