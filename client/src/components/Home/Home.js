@@ -13,7 +13,7 @@ import {
 import ChipInput from "material-ui-chip-input";
 
 import useStyles from "../Home/styles";
-import { getPostsBySearch } from "../../redux/actionCreators/posts";
+import { fetchPostsBySearch } from "../../redux/actionCreators/posts";
 
 import Form from "../Form/Form";
 import Posts from "../Posts/Posts";
@@ -39,11 +39,20 @@ const Home = () => {
   const searchQuery = query.get("searchQuery");
 
   const searchPost = () => {
-    if (search.trim()) {
-      dispatch(getPostsBySearch({ search, tags: tags.join(", ") }));
+    if (search.trim() || tags) {
+      const searchResult = search || "none";
+      const tagsResult = tags.join(",");
+
+      dispatch(fetchPostsBySearch({ search, tags: tags.join(", ") }));
+      navigate(`/posts/search?searchQuery=${searchResult}&tags=${tagsResult}`);
     } else {
       navigate("/posts");
     }
+  };
+
+  const cancelFilter = () => {
+    navigate("/posts");
+    navigate(0);
   };
 
   const handleOnKeyPress = (e) => {
@@ -66,7 +75,7 @@ const Home = () => {
           alignItems="stretch"
           spacing={3}
         >
-          <Grid className={classes.postsContainer} item xs={12} sm={6} md={9}>
+          <Grid className={classes.postsContainer} item xs={12} sm={8} md={8}>
             <Posts />
           </Grid>
           <Grid className={classes.gridContainer} item xs={12} sm={6} md={3}>
@@ -99,6 +108,13 @@ const Home = () => {
                 color="primary"
               >
                 Search
+              </Button>
+              <Button
+                onClick={cancelFilter}
+                variant="contained"
+                color="primary"
+              >
+                Cancel Filter
               </Button>
             </AppBar>
             {isAuthenticated && <Form />}

@@ -11,13 +11,13 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   }
 });
 
-export const getPostsBySearch = createAsyncThunk(
+export const fetchPostsBySearch = createAsyncThunk(
   "posts/search",
   async (searchQuery) => {
     try {
       const { data } = await api.fetchPostsBySearch(searchQuery);
 
-      console.log(data);
+      return data;
     } catch (error) {
       console.log(error.message);
     }

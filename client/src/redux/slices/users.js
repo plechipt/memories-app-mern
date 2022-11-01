@@ -13,9 +13,7 @@ const initialState = {
 
 export const userSlice = createSlice({
   name: "counter",
-  initialState: {
-    ...initialState,
-  },
+  initialState,
   reducers: {
     resetUser: () => initialState,
     turnOnLoading: (state) => {
