@@ -15,6 +15,7 @@ const initialState = {
   currentPage: 1,
   numberOfPages: 1,
   status: "idle",
+  isLoading: false,
   error: null,
 };
 
@@ -23,6 +24,9 @@ export const postSlice = createSlice({
   initialState,
   reducers: {
     resetPosts: () => initialState,
+    turnOnLoading: (state) => {
+      state.isLoading = true;
+    },
   },
   extraReducers: {
     [fetchPosts.fulfilled]: (state, action) => {
@@ -31,14 +35,19 @@ export const postSlice = createSlice({
       state.posts = posts;
       state.currentPage = currentPage;
       state.numberOfPages = numberOfPages;
+      state.isLoading = false;
     },
     [fetchPost.fulfilled]: (state, action) => {
       const post = action.payload;
-      console.log(post);
+
+      state.post = post;
+      state.isLoading = false;
     },
     [fetchPostsBySearch.fulfilled]: (state, action) => {
       const newPosts = action.payload;
+
       state.posts = newPosts;
+      state.isLoading = false;
     },
     [addPost.fulfilled]: (state, action) => {
       const newPosts = [...state.posts, action.payload];
@@ -65,5 +74,5 @@ export const postSlice = createSlice({
   },
 });
 
-export const { resetPosts } = postSlice.actions;
+export const { resetPosts, turnOnLoading } = postSlice.actions;
 export default postSlice.reducer;

@@ -45,7 +45,12 @@ const Post = ({ post }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
-      <ButtonBase onClick={handleOnPostClick} className={classes.cardAction}>
+      <ButtonBase
+        onClick={handleOnPostClick}
+        className={classes.cardAction}
+        component="span"
+        name="test"
+      >
         <CardMedia
           className={classes.media}
           image={post.selectedFile ? post.selectedFile : defaultImage}

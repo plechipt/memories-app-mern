@@ -11,22 +11,33 @@ import {
 
 import useStyles from "./styles";
 import { fetchPost } from "../../redux/actionCreators/posts";
+import { turnOnLoading } from "../../redux/slices/posts";
+
+const DEFAULT_IMAGE = process.env.REACT_APP_DEFAULT_IMAGE;
 
 const PostDetail = () => {
   const classes = useStyles();
+
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { post } = useSelector((state) => state.posts);
+  const { post, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(turnOnLoading());
     dispatch(fetchPost(id));
   }, [id]);
 
   if (!post) return null;
 
-  console.log(post);
+  if (isLoading) {
+    return (
+      <Paper elevation={6} className={classes.loadingPaper}>
+        <CircularProgress size="7em" />
+      </Paper>
+    );
+  }
 
   return (
     <Paper className={classes.card}>
@@ -43,9 +54,9 @@ const PostDetail = () => {
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
         <Typography gutterBottom variant="body1" component="p">
-          {post.message}
+          {post.text}
         </Typography>
-        <Typography variant="h6">Created by: {post.name}</Typography>
+        <Typography variant="h6">Created by: {post.creator}</Typography>
         <Typography variant="body1">
           {moment(post.createdAt).fromNow()}
         </Typography>
@@ -58,6 +69,15 @@ const PostDetail = () => {
           <strong>Comments - coming soon!</strong>
         </Typography>
       </div>
+      {post.selectedFile !== "" ? (
+        <div className={classes.imageSection}>
+          <img
+            className={classes.media}
+            src={post.selectedFile}
+            alt={post.title}
+          />
+        </div>
+      ) : null}
     </Paper>
   );
 };

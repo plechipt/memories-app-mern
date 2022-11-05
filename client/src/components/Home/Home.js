@@ -14,6 +14,7 @@ import ChipInput from "material-ui-chip-input";
 
 import useStyles from "../Home/styles";
 import { fetchPostsBySearch } from "../../redux/actionCreators/posts";
+import { turnOnLoading } from "../../redux/slices/posts";
 
 import Form from "../Form/Form";
 import Posts from "../Posts/Posts";
@@ -43,6 +44,7 @@ const Home = () => {
       const searchResult = search || "none";
       const tagsResult = tags.join(",");
 
+      dispatch(turnOnLoading());
       dispatch(fetchPostsBySearch({ search, tags: tags.join(", ") }));
       navigate(`/posts/search?searchQuery=${searchResult}&tags=${tagsResult}`);
     } else {

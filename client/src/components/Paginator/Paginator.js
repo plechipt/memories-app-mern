@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Pagination, PaginationItem } from "@material-ui/lab";
 
 import { fetchPosts } from "../../redux/actionCreators/posts";
+import { turnOnLoading } from "../../redux/slices/posts";
 
 const Paginator = ({ page }) => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const Paginator = ({ page }) => {
 
   useEffect(() => {
     if (page) {
+      dispatch(turnOnLoading());
       dispatch(fetchPosts(page));
     }
   }, [page]);
