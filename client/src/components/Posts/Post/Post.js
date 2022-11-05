@@ -45,71 +45,65 @@ const Post = ({ post }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
-      <ButtonBase
+      <CardMedia
         onClick={handleOnPostClick}
-        className={classes.cardAction}
-        component="span"
-        name="test"
-      >
-        <CardMedia
-          className={classes.media}
-          image={post.selectedFile ? post.selectedFile : defaultImage}
-          title={post.title}
-        />
-        <div className={classes.overlay}>
-          <Typography variant="h6">{post.creator}</Typography>
-          <Typography variant="body2">
-            {moment(post.createdAt).fromNow()}
-          </Typography>
-        </div>
-        <div className={classes.overlay2}>
-          {user && user.id === post.userId && (
-            <Button
-              style={{ color: "white" }}
-              size="small"
-              onClick={() => {
-                handleOnUpdate();
-              }}
-            >
-              <MoreHorizIcon fontSize="medium" />
-            </Button>
-          )}
-        </div>
-        <div className={classes.details}>
-          <Typography variant="body2" color="textSecondary">
-            {post.tags.map((tag) => `#${tag} `)}
-          </Typography>
-        </div>
-        <Typography className={classes.title} variant="h5" gutterBottom>
-          {post.title}
+        className={classes.media}
+        image={post.selectedFile ? post.selectedFile : defaultImage}
+        title={post.title}
+      />
+      <div className={classes.overlay}>
+        <Typography variant="h6">{post.creator}</Typography>
+        <Typography variant="body2">
+          {moment(post.createdAt).fromNow()}
         </Typography>
-        <CardContent>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            gutterBottom
-          >
-            {post.text}
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.cardActions}>
+      </div>
+      <div className={classes.overlay2}>
+        {user && user.id === post.userId && (
           <Button
+            style={{ color: "white" }}
             size="small"
-            color="primary"
-            disabled={!user}
-            onClick={handleOnLike}
+            onClick={() => {
+              handleOnUpdate();
+            }}
           >
-            <Likes post={post} />
+            <MoreHorizIcon fontSize="medium" />
           </Button>
-          {user && user.id === post.userId && (
-            <Button size="small" color="primary" onClick={handleOnDelete}>
-              <DeleteIcon fontSize="small" />
-              Delete
-            </Button>
-          )}
-        </CardActions>
-      </ButtonBase>
+        )}
+      </div>
+      <div className={classes.details}>
+        <Typography variant="body2" color="textSecondary">
+          {post.tags.map((tag) => `#${tag} `)}
+        </Typography>
+      </div>
+      <Typography className={classes.title} variant="h5" gutterBottom>
+        {post.title}
+      </Typography>
+      <CardContent>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          component="p"
+          gutterBottom
+        >
+          {post.text}
+        </Typography>
+      </CardContent>
+      <CardActions className={classes.cardActions}>
+        <Button
+          size="small"
+          color="primary"
+          disabled={!user}
+          onClick={handleOnLike}
+        >
+          <Likes post={post} />
+        </Button>
+        {user && user.id === post.userId && (
+          <Button size="small" color="primary" onClick={handleOnDelete}>
+            <DeleteIcon fontSize="small" />
+            Delete
+          </Button>
+        )}
+      </CardActions>
     </Card>
   );
 };

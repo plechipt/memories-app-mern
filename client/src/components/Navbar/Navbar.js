@@ -34,10 +34,7 @@ const Navbar = () => {
     <AppBar className={classes.appBar} position="static" color="inherit">
       <Box
         className={classes.brandContainer}
-        onClick={() => {
-          navigate("/posts");
-          navigate(0);
-        }}
+        onClick={() => navigate("/posts")}
       >
         <img src={memoriesText} alt="icon" height="45" />
         <img
