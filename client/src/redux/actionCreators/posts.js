@@ -11,6 +11,16 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async (page) => {
   }
 });
 
+export const fetchPost = createAsyncThunk("posts/fetchPost", async (id) => {
+  try {
+    const { data } = await api.fetchPost(id);
+
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 export const fetchPostsBySearch = createAsyncThunk(
   "posts/search",
   async (searchQuery) => {

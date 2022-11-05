@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchPosts,
+  fetchPost,
   fetchPostsBySearch,
   addPost,
   updatePost,
@@ -10,6 +11,7 @@ import {
 
 const initialState = {
   posts: [],
+  post: undefined,
   currentPage: 1,
   numberOfPages: 1,
   status: "idle",
@@ -29,6 +31,10 @@ export const postSlice = createSlice({
       state.posts = posts;
       state.currentPage = currentPage;
       state.numberOfPages = numberOfPages;
+    },
+    [fetchPost.fulfilled]: (state, action) => {
+      const post = action.payload;
+      console.log(post);
     },
     [fetchPostsBySearch.fulfilled]: (state, action) => {
       const newPosts = action.payload;
