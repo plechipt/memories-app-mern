@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Typography,
@@ -12,12 +12,14 @@ import {
 } from "@material-ui/core";
 
 import useStyles from "./styles";
-import memories from "../../images/memories.png";
+import memoriesLogo from "../../images/memoriesLogo.png";
+import memoriesText from "../../images/memoriesText.png";
 import { logout } from "../../redux/actionCreators/users";
 
 const Navbar = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isAuthenticated, user, isLoading } = useSelector(
     (state) => state.users
   );
@@ -30,23 +32,21 @@ const Navbar = () => {
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
-      <div className={classes.brandContainer}>
-        <Typography
-          component={Link}
-          to="/"
-          className={classes.heading}
-          variant="h2"
-          align="center"
-        >
-          Memories
-          <img
-            className={classes.image}
-            src={memories}
-            alt="memories"
-            height="60"
-          />
-        </Typography>
-      </div>
+      <Box
+        className={classes.brandContainer}
+        onClick={() => {
+          navigate("/posts");
+          navigate(0);
+        }}
+      >
+        <img src={memoriesText} alt="icon" height="45" />
+        <img
+          className={classes.image}
+          src={memoriesLogo}
+          alt="memories"
+          height="40"
+        />
+      </Box>
       {isLoading === false ? (
         <Toolbar className={classes.toolbar}>
           {user !== null && user !== undefined && isAuthenticated ? (

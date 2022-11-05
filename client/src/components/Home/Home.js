@@ -75,7 +75,7 @@ const Home = () => {
           alignItems="stretch"
           spacing={3}
         >
-          <Grid className={classes.postsContainer} item xs={12} sm={8} md={8}>
+          <Grid className={classes.postsContainer} item xs={12} sm={6} md={9}>
             <Posts />
           </Grid>
           <Grid className={classes.gridContainer} item xs={12} sm={6} md={3}>
@@ -114,7 +114,7 @@ const Home = () => {
                 variant="contained"
                 color="primary"
               >
-                Cancel Filter
+                All Memories
               </Button>
             </AppBar>
             {isAuthenticated && <Form />}
