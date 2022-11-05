@@ -118,9 +118,11 @@ const Home = () => {
               </Button>
             </AppBar>
             {isAuthenticated && <Form />}
-            <Paper elevation={6}>
-              <Paginator page={page} />
-            </Paper>
+            {!searchQuery && !tags.length ? (
+              <Paper className={classes.pagination} elevation={6}>
+                <Paginator page={page} />
+              </Paper>
+            ) : null}
           </Grid>
         </Grid>
       </Container>

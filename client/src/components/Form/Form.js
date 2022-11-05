@@ -81,7 +81,7 @@ const Form = () => {
           value={formData.text}
           onChange={(e) => setFormData({ ...formData, text: e.target.value })}
           multiline
-          minRows={5}
+          minRows={3}
         ></TextField>
         <TextField
           name="tags"
