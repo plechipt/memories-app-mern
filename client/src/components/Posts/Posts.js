@@ -9,8 +9,6 @@ const Posts = () => {
   const classes = useStyles();
   const { posts } = useSelector((state) => state.posts);
 
-  console.log(posts);
-
   return !posts.length && posts.length !== 0 ? (
     <CircularProgress color="primary" />
   ) : (

@@ -13,19 +13,19 @@ const Paginator = ({ page }) => {
     if (page) {
       dispatch(fetchPosts(page));
     }
-  }, []);
+  }, [page]);
 
   return (
     <Pagination
-      page={page}
+      page={Number(page) || 1}
       count={numberOfPages}
       variant="outlined"
       color="primary"
       renderItem={(item) => (
         <PaginationItem
-          to={`/posts?page=${item.page}`}
           {...item}
           component={Link}
+          to={`/posts?page=${item.page}`}
         />
       )}
     />
