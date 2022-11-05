@@ -119,7 +119,7 @@ const Home = () => {
             </AppBar>
             {isAuthenticated && <Form />}
             <Paper elevation={6}>
-              <Paginator />
+              <Paginator page={page} />
             </Paper>
           </Grid>
         </Grid>

@@ -10,6 +10,8 @@ import {
 
 const initialState = {
   posts: [],
+  currentPage: 1,
+  numberOfPages: 1,
   status: "idle",
   error: null,
 };
@@ -22,8 +24,11 @@ export const postSlice = createSlice({
   },
   extraReducers: {
     [fetchPosts.fulfilled]: (state, action) => {
-      const newPosts = action.payload;
-      state.posts = newPosts;
+      const { posts, currentPage, numberOfPages } = action.payload;
+
+      state.posts = posts;
+      state.currentPage = currentPage;
+      state.numberOfPages = numberOfPages;
     },
     [fetchPostsBySearch.fulfilled]: (state, action) => {
       const newPosts = action.payload;
