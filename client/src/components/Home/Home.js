@@ -54,7 +54,6 @@ const Home = () => {
 
   const cancelFilter = () => {
     navigate("/posts");
-    navigate(0);
   };
 
   const handleOnKeyPress = (e) => {

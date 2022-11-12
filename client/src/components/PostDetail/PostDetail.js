@@ -10,7 +10,10 @@ import {
 } from "@material-ui/core";
 
 import useStyles from "./styles";
-import { fetchPost } from "../../redux/actionCreators/posts";
+import {
+  fetchPost,
+  fetchPostsBySearch,
+} from "../../redux/actionCreators/posts";
 import { turnOnLoading } from "../../redux/slices/posts";
 
 const DEFAULT_IMAGE = process.env.REACT_APP_DEFAULT_IMAGE;
@@ -21,13 +24,21 @@ const PostDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { post, isLoading } = useSelector((state) => state.posts);
+  const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(turnOnLoading());
     dispatch(fetchPost(id));
   }, [id]);
+
+  useEffect(() => {
+    if (post) {
+      dispatch(
+        fetchPostsBySearch({ search: "none", tags: post.tags.join(",") })
+      );
+    }
+  }, [post]);
 
   if (!post) return null;
 
@@ -38,6 +49,12 @@ const PostDetail = () => {
       </Paper>
     );
   }
+
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+
+  const openPost = (_id) => {
+    navigate(`/posts/${_id}`);
+  };
 
   return (
     <Paper className={classes.card}>
@@ -68,6 +85,43 @@ const PostDetail = () => {
         <Typography variant="body1">
           <strong>Comments - coming soon!</strong>
         </Typography>
+        {recommendedPosts.length && (
+          <div className={classes.section}>
+            <Typography variant="h5" gutterBottom>
+              You might also like
+            </Typography>
+            <Divider />
+            <div className={classes.recommendedPosts}>
+              {recommendedPosts.map(
+                ({ _id, title, text, creator, likes, selectedFile }) => (
+                  <div
+                    className={classes.cardContainer}
+                    onClick={() => openPost(_id)}
+                    key={_id}
+                  >
+                    <Typography variant="h6" gutterBottom>
+                      {title}
+                    </Typography>
+                    <Typography variant="subtitle2" gutterBottom>
+                      {creator}
+                    </Typography>
+                    <Typography variant="subtitle2" gutterBottom>
+                      {text}
+                    </Typography>
+                    <Typography variant="h6" gutterBottom>
+                      Likes: {likes.length}
+                    </Typography>
+                    <img
+                      src={selectedFile || DEFAULT_IMAGE}
+                      width="200"
+                      alt="Recommended post"
+                    />
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        )}
       </div>
       {post.selectedFile !== "" ? (
         <div className={classes.imageSection}>

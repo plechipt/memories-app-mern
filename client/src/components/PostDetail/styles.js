@@ -17,6 +17,7 @@ export default makeStyles((theme) => ({
   },
   section: {
     borderRadius: "20px",
+    marginTop: theme.spacing(10),
     margin: "10px",
     flex: 1,
   },
@@ -39,5 +40,9 @@ export default makeStyles((theme) => ({
     padding: "20px",
     borderRadius: "15px",
     height: "39vh",
+  },
+  cardContainer: {
+    margin: "30px",
+    cursor: "pointer",
   },
 }));

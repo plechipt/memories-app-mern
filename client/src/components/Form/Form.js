@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
@@ -9,6 +10,8 @@ import useStyles from "./styles";
 const Form = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { receivedFormData } = useSelector((state) => state.form.form);
   const [formIsInUpdateMode, setFormIsInUpdateMode] = useState(false);
 
