@@ -9,8 +9,6 @@ const Posts = () => {
   const classes = useStyles();
   const { posts, isLoading } = useSelector((state) => state.posts);
 
-  console.log(posts);
-
   return isLoading ? (
     <CircularProgress color="primary" />
   ) : (

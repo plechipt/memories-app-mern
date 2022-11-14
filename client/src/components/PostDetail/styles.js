@@ -17,7 +17,6 @@ export default makeStyles((theme) => ({
   },
   section: {
     borderRadius: "20px",
-    marginTop: theme.spacing(10),
     margin: "10px",
     flex: 1,
   },
@@ -44,5 +43,11 @@ export default makeStyles((theme) => ({
   cardContainer: {
     margin: "30px",
     cursor: "pointer",
+  },
+  commentsContainer: {
+    marginTop: theme.spacing(3),
+  },
+  commentInput: {
+    marginTop: theme.spacing(1),
   },
 }));

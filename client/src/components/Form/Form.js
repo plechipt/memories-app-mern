@@ -61,7 +61,6 @@ const Form = () => {
     <Paper className={classes.paper} elevation={6}>
       <form
         autoComplete="off"
-        noValidate
         className={`${classes.root} ${classes.form}`}
         onSubmit={formIsInUpdateMode ? patchPost : createPost}
       >
@@ -69,6 +68,7 @@ const Form = () => {
           {formIsInUpdateMode ? "Updating" : "Creating"} a memory
         </Typography>
         <TextField
+          required
           name="title"
           variant="outlined"
           label="Title"
@@ -77,6 +77,7 @@ const Form = () => {
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
         ></TextField>
         <TextField
+          required
           name="text"
           variant="outlined"
           label="Text"
@@ -87,6 +88,7 @@ const Form = () => {
           minRows={3}
         ></TextField>
         <TextField
+          required={true}
           name="tags"
           variant="outlined"
           label="Tags"
@@ -107,11 +109,11 @@ const Form = () => {
         </div>
         <Button
           className={classes.buttonSubmit}
+          type="submit"
           variant="contained"
           color="primary"
           size="large"
           fullWidth
-          type="submit"
         >
           Submit
         </Button>

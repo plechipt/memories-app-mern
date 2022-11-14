@@ -10,11 +10,12 @@ import {
 } from "@material-ui/core";
 
 import useStyles from "./styles";
+import Comments from "./Comments";
+import { turnOnLoading } from "../../redux/slices/posts";
 import {
   fetchPost,
   fetchPostsBySearch,
 } from "../../redux/actionCreators/posts";
-import { turnOnLoading } from "../../redux/slices/posts";
 
 const DEFAULT_IMAGE = process.env.REACT_APP_DEFAULT_IMAGE;
 
@@ -82,15 +83,8 @@ const PostDetail = () => {
           <strong>Realtime Chat - coming soon!</strong>
         </Typography>
         <Divider style={{ margin: "20px 0" }} />
-        <Typography variant="body1">
-          <strong>Comments - coming soon!</strong>
-        </Typography>
         {recommendedPosts.length && (
           <div className={classes.section}>
-            <Typography variant="h5" gutterBottom>
-              You might also like
-            </Typography>
-            <Divider />
             <div className={classes.recommendedPosts}>
               {recommendedPosts.map(
                 ({ _id, title, text, creator, likes, selectedFile }) => (
@@ -122,6 +116,7 @@ const PostDetail = () => {
             </div>
           </div>
         )}
+        <Comments post={post} />
       </div>
       {post.selectedFile !== "" ? (
         <div className={classes.imageSection}>
