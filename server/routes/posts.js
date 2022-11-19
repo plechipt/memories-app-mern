@@ -8,6 +8,7 @@ import {
   updatePost,
   deletePost,
   likePost,
+  commentPost,
 } from "../controllers/posts.js";
 
 const router = express.Router();
@@ -20,6 +21,7 @@ router.post("/", authMiddleware, createPost);
 router.patch("/:id", authMiddleware, updatePost);
 router.delete("/:id", authMiddleware, deletePost);
 router.patch("/:id/likePost", authMiddleware, likePost);
+router.post("/:id/commentPost", authMiddleware, commentPost);
 
 /*
 router.get("/", getPosts);

@@ -80,3 +80,16 @@ export const likePost = createAsyncThunk(
     }
   }
 );
+
+export const commentPost = createAsyncThunk(
+  "posts/commentPost",
+  async (commentData) => {
+    try {
+      const { data } = await api.commentPost(commentData);
+
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+);

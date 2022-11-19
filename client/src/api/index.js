@@ -22,6 +22,9 @@ export const updatePost = (updatedPost) =>
 export const likePost = (likedPost) =>
   API.patch(`posts/${likedPost._id}/likePost`, likedPost);
 
+export const commentPost = (commentData) =>
+  API.post(`posts/${commentData.postId}/commentPost`, commentData);
+
 export const fetchPostsBySearch = (searchQuery) =>
   API.get(
     `/posts/search?searchQuery=${searchQuery.search || "none"}&tags=${

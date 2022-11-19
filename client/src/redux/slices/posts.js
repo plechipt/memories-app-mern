@@ -7,6 +7,7 @@ import {
   updatePost,
   deletePost,
   likePost,
+  commentPost,
 } from "../actionCreators/posts";
 
 const initialState = {
@@ -69,6 +70,16 @@ export const postSlice = createSlice({
       const newPosts = state.posts.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
+      state.posts = newPosts;
+    },
+    [commentPost.fulfilled]: (state, action) => {
+      const { updatedPost, value } = action.payload;
+
+      const newPosts = state.posts.map((post) =>
+        post._id === action.payload._id ? action.payload : post
+      );
+
+      console.log(newPosts);
       state.posts = newPosts;
     },
   },
