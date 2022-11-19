@@ -76,10 +76,9 @@ export const postSlice = createSlice({
       const { updatedPost, value } = action.payload;
 
       const newPosts = state.posts.map((post) =>
-        post._id === action.payload._id ? action.payload : post
+        post._id === updatedPost._id ? updatedPost : post
       );
 
-      console.log(newPosts);
       state.posts = newPosts;
     },
   },

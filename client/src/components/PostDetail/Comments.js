@@ -20,9 +20,11 @@ const Comments = ({ post }) => {
     const value = `${user.username}: ${comment}`;
     const commentData = { value, postId };
 
-    const newComments = await dispatch(commentPost(commentData));
+    const {
+      payload: { updatedPost },
+    } = await dispatch(commentPost(commentData));
 
-    setComments(newComments);
+    setComments(updatedPost.comments);
     setComment("");
   };
 
@@ -58,7 +60,7 @@ const Comments = ({ post }) => {
             </div>
           )}
           <div className={classes.commentsContainer}>
-            {comments.map((comment, index) => (
+            {[...comments].reverse().map((comment, index) => (
               <Typography key={index} gutterBottom variant="subtitle1">
                 {comment}
               </Typography>
