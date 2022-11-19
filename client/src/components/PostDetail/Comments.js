@@ -62,7 +62,8 @@ const Comments = ({ post }) => {
           <div className={classes.commentsContainer}>
             {[...comments].reverse().map((comment, index) => (
               <Typography key={index} gutterBottom variant="subtitle1">
-                {comment}
+                <strong>{comment.split(": ")[0]}</strong>:
+                {comment.split(":")[1]}
               </Typography>
             ))}
           </div>

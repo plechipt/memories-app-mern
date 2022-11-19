@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import {
-  ButtonBase,
   Card,
   CardActions,
   CardContent,
@@ -27,6 +26,8 @@ const Post = ({ post }) => {
   const navigate = useNavigate();
   const defaultImage = process.env.REACT_APP_DEFAULT_IMAGE;
 
+  const [likes, setLikes] = useState(post.likes);
+
   const handleOnPostClick = () => {
     navigate(`/posts/${post._id}`);
   };
@@ -39,8 +40,18 @@ const Post = ({ post }) => {
     dispatch(deletePost(post._id));
   };
 
-  const handleOnLike = () => {
+  const handleOnLike = async () => {
     dispatch(likePost(post));
+
+    const userHasLikedPost =
+      user && post.likes.find((like) => like === user.id);
+
+    if (userHasLikedPost) {
+      const filteredUser = post.likes.filter((id) => id !== user.id);
+      setLikes(filteredUser);
+    } else {
+      setLikes([...post.likes, user.id]);
+    }
   };
 
   return (
@@ -95,7 +106,7 @@ const Post = ({ post }) => {
           disabled={!user}
           onClick={handleOnLike}
         >
-          <Likes post={post} />
+          <Likes likes={likes} />
         </Button>
         {user && user.id === post.userId && (
           <Button size="small" color="primary" onClick={handleOnDelete}>

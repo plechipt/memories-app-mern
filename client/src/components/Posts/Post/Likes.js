@@ -3,20 +3,18 @@ import { useSelector } from "react-redux";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 
-//<Box mr={1}>Like</Box>
-
-const Likes = ({ post }) => {
+const Likes = ({ likes }) => {
   const { user } = useSelector((state) => state.users);
 
-  if (post.likes.length > 0) {
+  if (likes.length > 0) {
     return (
       <>
-        {user && post.likes.find((like) => like === user.id) ? (
+        {user && likes.find((like) => like === user.id) ? (
           <ThumbUpAltIcon fontSize="small" />
         ) : (
           <ThumbUpAltOutlined fontSize="small" />
         )}
-        &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
+        &nbsp;{likes.length} {likes.length === 1 ? "Like" : "Likes"}
       </>
     );
   }
