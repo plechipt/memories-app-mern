@@ -12,9 +12,8 @@ const postSchema = mongoose.Schema({
   likes: { type: [String], default: [] },
   comments: {
     text: String,
-    createdAt: { type: Date, default: Date.now },
-    postedBy: { type: ObjectId, ref: "User" },
-    default: [],
+    userId: { type: ObjectId, ref: "user" },
+    createdAt: { type: Date, default: new Date() },
   },
   createdAt: {
     type: Date,

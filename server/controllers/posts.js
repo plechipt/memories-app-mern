@@ -138,7 +138,9 @@ export const commentPost = async (req, res) => {
       postId,
       { $push: { comments: comment } },
       { new: true }
-    );
+    )
+      .populate("comments.userId", "_id creator")
+      .populate("userId", "_id creator");
 
     res.status(201).json({ updatedPost });
   } catch (error) {
