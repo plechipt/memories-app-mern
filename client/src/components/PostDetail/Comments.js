@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Typography, TextField, Button } from "@material-ui/core";
+import { Typography, TextField, Button, List } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { commentPost } from "../../redux/actionCreators/posts";
 import useStyles from "./styles";
+import { commentPost } from "../../redux/actionCreators/posts";
+import Comment from "./Comment";
 
 const Comments = ({ post }) => {
   const classes = useStyles();
@@ -60,12 +61,12 @@ const Comments = ({ post }) => {
             </div>
           )}
           <div className={classes.commentsContainer}>
-            {[...comments].reverse().map((comment, index) => (
-              <Typography key={index} gutterBottom variant="subtitle1">
-                <strong>{comment.split(": ")[0]}</strong>:
-                {comment.split(":")[1]}
-              </Typography>
-            ))}
+            <List
+              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            >
+              <Comment />
+              <Comment />
+            </List>
           </div>
         </div>
       </div>
