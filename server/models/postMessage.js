@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+const ObjectId = mongoose.Types.ObjectId;
+
 const postSchema = mongoose.Schema({
   title: String,
   text: String,
@@ -10,6 +12,7 @@ const postSchema = mongoose.Schema({
   likes: { type: [String], default: [] },
   comments: {
     type: [String],
+    text: String,
     createdAt: { type: Date, default: Date.now },
     postedBy: { type: ObjectId, ref: "User" },
     default: [],

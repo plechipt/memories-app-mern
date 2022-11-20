@@ -18,15 +18,10 @@ const Comments = ({ post }) => {
 
   const handleSubmit = async () => {
     const postId = post._id;
-    const value = `${user.username}: ${comment}`;
-    const commentData = { value, postId };
+    const userId = user.id;
+    const text = comment;
 
-    const {
-      payload: { updatedPost },
-    } = await dispatch(commentPost(commentData));
-
-    setComments(updatedPost.comments);
-    setComment("");
+    dispatch(commentPost({ postId, userId, text }));
   };
 
   return (

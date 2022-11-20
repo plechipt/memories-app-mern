@@ -40,5 +40,6 @@ export const googleLogin = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk("users/logout", async () => {
-  localStorage.removeItem("token", "profilePicture");
+  localStorage.removeItem("token");
+  localStorage.removeItem("profilePicture");
 });
