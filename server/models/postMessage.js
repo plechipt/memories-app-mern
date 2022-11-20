@@ -11,7 +11,6 @@ const postSchema = mongoose.Schema({
   selectedFile: String,
   likes: { type: [String], default: [] },
   comments: {
-    type: [String],
     text: String,
     createdAt: { type: Date, default: Date.now },
     postedBy: { type: ObjectId, ref: "User" },

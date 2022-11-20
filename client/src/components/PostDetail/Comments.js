@@ -21,7 +21,7 @@ const Comments = ({ post }) => {
     const userId = user.id;
     const text = comment;
 
-    dispatch(commentPost({ postId, userId, text }));
+    dispatch(commentPost({ postId, comment: { userId, text } }));
   };
 
   return (
