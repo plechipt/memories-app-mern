@@ -71,14 +71,16 @@ const Comments = ({ post }) => {
                   bgcolor: "background.paper",
                 }}
               >
-                {comments.map(({ text, userId, createdAt, _id }) => (
-                  <Comment
-                    key={_id}
-                    text={text}
-                    userId={userId}
-                    createdAt={createdAt}
-                  />
-                ))}
+                {[...comments]
+                  .reverse()
+                  .map(({ text, userId, createdAt, _id }) => (
+                    <Comment
+                      key={_id}
+                      text={text}
+                      userId={userId}
+                      createdAt={createdAt}
+                    />
+                  ))}
               </List>
             </div>
           )}
