@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-const ObjectId = mongoose.Types.ObjectId;
-
 const postSchema = mongoose.Schema({
   title: String,
   text: String,
@@ -13,7 +11,7 @@ const postSchema = mongoose.Schema({
   comments: [
     {
       text: String,
-      userId: { type: ObjectId, ref: "user" },
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
       createdAt: { type: Date, default: new Date() },
     },
   ],

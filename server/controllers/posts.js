@@ -134,15 +134,16 @@ export const commentPost = async (req, res) => {
   const { postId, comment } = req.body;
 
   try {
-    const updatedPost = await PostMessage.findByIdAndUpdate(
+    PostMessage.findByIdAndUpdate(
       postId,
       { $push: { comments: comment } },
       { new: true }
     )
-      .populate("comments.userId", "_id creator")
-      .populate("userId", "_id creator");
-
-    res.status(201).json({ updatedPost });
+      .populate("comments.userId", "username")
+      .exec((error, result) => {
+        console.log(result);
+        res.status(201).json(result);
+      });
   } catch (error) {
     console.log(error.message);
     res.status(409).json({ message: error.message });

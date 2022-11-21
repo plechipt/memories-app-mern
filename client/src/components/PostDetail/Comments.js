@@ -21,16 +21,15 @@ const Comments = ({ post }) => {
     const userId = user.id;
     const text = comment;
 
-    const {
-      payload: { updatedPost },
-    } = await dispatch(commentPost({ postId, comment: { text, userId } }));
+    const { payload } = await dispatch(
+      commentPost({ postId, comment: { text, userId } })
+    );
 
-    setComments(updatedPost.comments);
+    setComments(payload.comments);
     setComment("");
   };
 
   console.log(comments);
-  console.log(post);
 
   return (
     <div>
