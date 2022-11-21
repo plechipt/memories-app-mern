@@ -72,15 +72,6 @@ export const postSlice = createSlice({
       );
       state.posts = newPosts;
     },
-    [commentPost.fulfilled]: (state, action) => {
-      const { updatedPost } = action.payload;
-
-      const newPosts = state.posts.map((post) =>
-        post._id === updatedPost._id ? updatedPost : post
-      );
-
-      state.posts = newPosts;
-    },
   },
 });
 

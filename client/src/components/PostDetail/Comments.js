@@ -21,8 +21,16 @@ const Comments = ({ post }) => {
     const userId = user.id;
     const text = comment;
 
-    dispatch(commentPost({ postId, comment: { text, userId } }));
+    const {
+      payload: { updatedPost },
+    } = await dispatch(commentPost({ postId, comment: { text, userId } }));
+
+    setComments(updatedPost.comments);
+    setComment("");
   };
+
+  console.log(comments);
+  console.log(post);
 
   return (
     <div>
@@ -55,14 +63,21 @@ const Comments = ({ post }) => {
               </Button>
             </div>
           )}
-          <div className={classes.commentsContainer}>
-            <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
-              <Comment />
-              <Comment />
-            </List>
-          </div>
+          {comments && (
+            <div className={classes.commentsContainer}>
+              <List
+                sx={{
+                  width: "100%",
+                  maxWidth: 360,
+                  bgcolor: "background.paper",
+                }}
+              >
+                {comments.map((comment, index) => (
+                  <Comment key={index} comment={comment} />
+                ))}
+              </List>
+            </div>
+          )}
         </div>
       </div>
     </div>

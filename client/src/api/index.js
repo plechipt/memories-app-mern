@@ -4,8 +4,6 @@ const API = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
 });
 
-console.log("test");
-
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("token")) {
     const token = localStorage.getItem("token");

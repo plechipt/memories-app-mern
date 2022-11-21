@@ -6,7 +6,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 
-const Comment = () => {
+const Comment = ({ comment }) => {
   return (
     <ListItem alignItems="flex-start">
       <ListItemAvatar>
