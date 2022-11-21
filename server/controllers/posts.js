@@ -45,9 +45,11 @@ export const getPost = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const post = await PostMessage.findById(id);
-
-    res.status(200).json(post);
+    PostMessage.findById(id)
+      .populate("comments.userId", "username")
+      .exec((error, result) => {
+        res.status(201).json(result);
+      });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -141,7 +143,6 @@ export const commentPost = async (req, res) => {
     )
       .populate("comments.userId", "username")
       .exec((error, result) => {
-        console.log(result);
         res.status(201).json(result);
       });
   } catch (error) {
