@@ -35,6 +35,8 @@ const PostDetail = () => {
   }, [id]);
 
   useEffect(() => {
+    dispatch(turnOnLoading());
+
     if (post) {
       dispatch(
         fetchPostsBySearch({ search: "none", tags: post.tags.join(",") })
@@ -44,19 +46,19 @@ const PostDetail = () => {
 
   if (!post) return null;
 
+  /*
   if (isLoading) {
-    return (
-      <Paper elevation={6} className={classes.loadingPaper}>
-        <CircularProgress size="7em" />
-      </Paper>
-    );
+    return <CircularProgress size="5em" />;
   }
+  */
 
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
   const openPost = (_id) => {
     navigate(`/posts/${_id}`);
   };
+
+  console.log(isLoading);
 
   return (
     <Grow in>
@@ -76,13 +78,11 @@ const PostDetail = () => {
           <Typography gutterBottom variant="body1" component="p">
             {post.text}
           </Typography>
-          <Typography variant="h6">Created by: {post.creator}</Typography>
+          <Typography variant="h6">
+            by <b>{post.creator}</b>
+          </Typography>
           <Typography variant="body1">
             {moment(post.createdAt).fromNow()}
-          </Typography>
-          <Divider style={{ margin: "20px 0" }} />
-          <Typography variant="body1">
-            <strong>Realtime Chat - coming soon!</strong>
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
           {recommendedPosts.length && (

@@ -41,6 +41,8 @@ export const postSlice = createSlice({
     [fetchPost.fulfilled]: (state, action) => {
       const post = action.payload;
 
+      console.log(action.payload);
+
       state.post = post;
       state.isLoading = false;
     },
@@ -51,7 +53,7 @@ export const postSlice = createSlice({
       state.isLoading = false;
     },
     [addPost.fulfilled]: (state, action) => {
-      const newPosts = [...state.posts, action.payload];
+      const newPosts = [action.payload, ...state.posts];
       state.posts = newPosts;
     },
     [updatePost.fulfilled]: (state, action) => {

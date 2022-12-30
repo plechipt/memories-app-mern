@@ -50,7 +50,6 @@ export default makeStyles((theme) => ({
   commentInput: {
     marginTop: theme.spacing(1),
   },
-  upperComment: {},
   postedDate: {
     marginLeft: theme.spacing(1),
     marginBottom: theme.spacing(3),

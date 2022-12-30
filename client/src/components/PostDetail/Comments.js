@@ -29,8 +29,6 @@ const Comments = ({ post }) => {
     setComment("");
   };
 
-  console.log(comments);
-
   return (
     <div>
       <div className={classes.commentsOuterContainer}>

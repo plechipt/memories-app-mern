@@ -20,13 +20,12 @@ const Comment = ({ text, userId, createdAt }) => {
         </ListItemAvatar>
         <ListItemText
           primary={
-            <React.Fragment className={classes.upperComment}>
+            <React.Fragment>
               <strong>{userId.username}</strong>
               <Typography
                 className={classes.postedDate}
                 component="span"
                 variant="body2"
-                color="text.secondary"
               >
                 {moment(createdAt).fromNow()}
               </Typography>
