@@ -48,8 +48,6 @@ const PostDetail = () => {
     navigate(`/posts/${_id}`);
   };
 
-  console.log(post);
-
   return (
     <Grow in>
       <Paper className={classes.card}>
