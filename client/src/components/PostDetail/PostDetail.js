@@ -34,16 +34,6 @@ const PostDetail = () => {
     dispatch(fetchPost(id));
   }, [id]);
 
-  useEffect(() => {
-    dispatch(turnOnLoading());
-
-    if (post) {
-      dispatch(
-        fetchPostsBySearch({ search: "none", tags: post.tags.join(",") })
-      );
-    }
-  }, [post]);
-
   if (!post) return null;
 
   /*
@@ -58,7 +48,7 @@ const PostDetail = () => {
     navigate(`/posts/${_id}`);
   };
 
-  console.log(isLoading);
+  console.log(post);
 
   return (
     <Grow in>

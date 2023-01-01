@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, TextField, Button, List } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import useStyles from "./styles";
 import { commentPost } from "../../redux/actionCreators/posts";
+import { turnOnLoading } from "../../redux/slices/posts";
 import Comment from "./Comment";
 
 const Comments = ({ post }) => {
@@ -15,6 +16,13 @@ const Comments = ({ post }) => {
 
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    const { comments } = post;
+    dispatch(turnOnLoading());
+
+    setComments(comments);
+  }, [post]);
 
   const handleSubmit = async () => {
     const postId = post._id;
