@@ -1,9 +1,11 @@
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { ListItemText } from "@material-ui/core";
 
 export default makeStyles((theme) => ({
   root: {
     width: "100%",
-    maxWidth: 360,
+    maxWidth: 600,
+    margin: "auto",
     backgroundColor: theme.palette.background.paper,
   },
   avatar: {

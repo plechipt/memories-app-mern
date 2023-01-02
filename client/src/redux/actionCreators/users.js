@@ -1,6 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../../api";
 
+export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
+  try {
+    const { data } = await api.getAllUsers();
+
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 export const register = createAsyncThunk(
   "users/register",
   async (user, { rejectWithValue }) => {

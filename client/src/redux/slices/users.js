@@ -1,10 +1,17 @@
 import jwt_decode from "jwt-decode";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { register, login, googleLogin, logout } from "../actionCreators/users";
+import {
+  getAllUsers,
+  register,
+  login,
+  googleLogin,
+  logout,
+} from "../actionCreators/users";
 
 const initialState = {
   user: undefined,
+  users: [],
   isLoading: false,
   isAuthenticated: false,
   status: "idle",
@@ -50,6 +57,12 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: {
+    [getAllUsers.fulfilled]: (state, action) => {
+      const { users } = action.payload;
+
+      state.users = users;
+      state.isLoading = false;
+    },
     [register.fulfilled]: (state, action) => {
       state.user = action.payload;
     },

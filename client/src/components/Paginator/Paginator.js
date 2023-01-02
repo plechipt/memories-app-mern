@@ -8,7 +8,7 @@ import { turnOnLoading } from "../../redux/slices/posts";
 
 const Paginator = ({ page }) => {
   const dispatch = useDispatch();
-  const { numberOfPages } = useSelector((state) => state.posts);
+  const { numberOfPages, isLoading } = useSelector((state) => state.posts);
 
   useEffect(() => {
     if (page) {

@@ -1,5 +1,5 @@
-import React from "react";
-import useStyles from "./styles";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   List,
@@ -7,30 +7,35 @@ import {
   ListItemAvatar,
   Avatar,
   Typography,
+  CircularProgress,
 } from "@material-ui/core";
 
-const users = [
-  {
-    name: "Jane Doe",
-    avatarUrl: "https://example.com/jane-doe.jpg",
-  },
-  {
-    name: "John Doe",
-    avatarUrl: "https://example.com/john-doe.jpg",
-  },
-];
+import useStyles from "./styles";
+import { getAllUsers } from "../../redux/actionCreators/users";
+import { turnOnLoading } from "../../redux/slices/users";
 
 const Users = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { users, isLoading } = useSelector((state) => state.users);
 
-  return (
+  useEffect(() => {
+    dispatch(turnOnLoading());
+    dispatch(getAllUsers());
+  }, []);
+
+  console.log(isLoading);
+
+  return isLoading ? (
+    <CircularProgress color="primary" />
+  ) : (
     <List className={classes.root}>
       {users.map((user) => (
-        <ListItem key={user.name}>
+        <ListItem className={classes.listItem} key={user._id}>
           <ListItemAvatar>
             <Avatar src={user.avatarUrl} />
           </ListItemAvatar>
-          <Typography>{user.name}</Typography>
+          <Typography>{user.username}</Typography>
         </ListItem>
       ))}
     </List>
