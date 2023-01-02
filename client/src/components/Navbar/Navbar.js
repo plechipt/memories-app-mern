@@ -64,10 +64,18 @@ const Navbar = () => {
                 {user.username}
               </Typography>
               <Button
+                onClick={() => navigate("/users")}
+                variant="contained"
+                className={classes.users}
+                color="primary"
+              >
+                Users
+              </Button>
+              <Button
                 onClick={handleOnLogout}
                 variant="contained"
                 className={classes.logout}
-                color="secondary"
+                color="primary"
               >
                 Logout
               </Button>

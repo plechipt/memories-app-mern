@@ -43,7 +43,7 @@ export default makeStyles((theme) => ({
       justifyContent: "center",
     },
   },
-  logout: {
+  users: {
     marginLeft: "20px",
   },
   userName: {
