@@ -13,6 +13,7 @@ const initialState = {
   user: undefined,
   users: [],
   isLoading: false,
+  userIsLoading: false,
   isAuthenticated: false,
   status: "idle",
   error: null,
@@ -25,6 +26,9 @@ export const userSlice = createSlice({
     resetUser: () => initialState,
     turnOnLoading: (state) => {
       state.isLoading = true;
+    },
+    turnOnUserLoading: (state) => {
+      state.userIsLoading = true;
     },
     checkUser: (state) => {
       const token = localStorage.token;
@@ -53,7 +57,8 @@ export const userSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
       }
-      state.isLoading = false;
+
+      state.userIsLoading = false;
     },
   },
   extraReducers: {
@@ -87,5 +92,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { resetUser, turnOnLoading, checkUser } = userSlice.actions;
+export const { resetUser, turnOnLoading, turnOnUserLoading, checkUser } =
+  userSlice.actions;
 export default userSlice.reducer;

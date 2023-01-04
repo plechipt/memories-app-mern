@@ -10,14 +10,14 @@ import Navbar from "./components//Navbar/Navbar";
 import PostDetail from "./components/PostDetail/PostDetail";
 import Users from "./components/Users/Users";
 
-import { turnOnLoading, checkUser } from "./redux/slices/users";
+import { turnOnUserLoading, checkUser } from "./redux/slices/users";
 
 function App() {
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.users);
 
   useEffect(() => {
-    dispatch(turnOnLoading());
+    dispatch(turnOnUserLoading());
     dispatch(checkUser());
   }, [isAuthenticated]);
 
