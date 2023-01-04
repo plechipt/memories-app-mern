@@ -1,15 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  Typography,
-  CircularProgress,
-} from "@material-ui/core";
+import { List, CircularProgress, Grow } from "@material-ui/core";
 
+import User from "./User";
 import useStyles from "./styles";
 import { getAllUsers } from "../../redux/actionCreators/users";
 import { turnOnLoading } from "../../redux/slices/users";
@@ -24,21 +18,16 @@ const Users = () => {
     dispatch(getAllUsers());
   }, []);
 
-  console.log(isLoading);
-
   return isLoading ? (
     <CircularProgress color="primary" />
   ) : (
-    <List className={classes.root}>
-      {users.map((user) => (
-        <ListItem className={classes.listItem} key={user._id}>
-          <ListItemAvatar>
-            <Avatar src={user.avatarUrl} />
-          </ListItemAvatar>
-          <Typography>{user.username}</Typography>
-        </ListItem>
-      ))}
-    </List>
+    <Grow in>
+      <List className={classes.root}>
+        {users.map(({ _id, avatarUrl, username }) => (
+          <User key={_id} avatarUrl={avatarUrl} username={username} />
+        ))}
+      </List>
+    </Grow>
   );
 };
 
