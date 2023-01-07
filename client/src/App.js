@@ -15,7 +15,7 @@ import { turnOnUserLoading, checkUser } from "./redux/slices/users";
 
 function App() {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.users);
+  const { isAuthenticated } = useSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(turnOnUserLoading());

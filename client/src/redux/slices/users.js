@@ -12,6 +12,7 @@ import {
 
 const initialState = {
   user: undefined,
+  userDetail: undefined,
   users: [],
   isLoading: false,
   userIsLoading: false,
@@ -70,11 +71,9 @@ export const userSlice = createSlice({
       state.isLoading = false;
     },
     [getUser.fulfilled]: (state, action) => {
-      const user = action.payload;
+      const { user } = action.payload;
 
-      console.log(user);
-
-      state.user = user;
+      state.userDetail = user;
       state.isLoading = false;
     },
     [register.fulfilled]: (state, action) => {

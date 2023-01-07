@@ -18,7 +18,7 @@ const Users = () => {
     dispatch(getAllUsers());
   }, []);
 
-  return isLoading ? (
+  return !users ? (
     <CircularProgress color="primary" />
   ) : (
     <Grow in>
