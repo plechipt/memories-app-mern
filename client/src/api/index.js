@@ -36,6 +36,7 @@ export const fetchPostsBySearch = (searchQuery) =>
 
 // Users
 export const getAllUsers = () => API.get("/users");
+export const getUser = (id) => API.get(`/users/${id}`);
 export const register = (user) => API.post("/users", user);
 export const login = (user) => API.post("/users/login", user);
 export const checkUser = () => API.get("/users/checkUser");

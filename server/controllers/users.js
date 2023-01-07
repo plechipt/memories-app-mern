@@ -4,7 +4,7 @@ import User from "../models/User.js";
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select(["-password"]);
+    const users = await User.find().select("-password");
 
     res.status(200).json({ users });
   } catch (err) {
@@ -16,7 +16,9 @@ export const getUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("-password");
+
+    console.log(user);
 
     res.status(200).json({ user });
   } catch (error) {

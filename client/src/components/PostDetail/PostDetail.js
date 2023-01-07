@@ -2,21 +2,12 @@ import React, { useEffect } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Grow,
-  Paper,
-  Typography,
-  CircularProgress,
-  Divider,
-} from "@material-ui/core";
+import { Grow, Paper, Typography, Divider } from "@material-ui/core";
 
 import useStyles from "./styles";
 import Comments from "./Comments";
 import { turnOnLoading } from "../../redux/slices/posts";
-import {
-  fetchPost,
-  fetchPostsBySearch,
-} from "../../redux/actionCreators/posts";
+import { fetchPost } from "../../redux/actionCreators/posts";
 
 const DEFAULT_IMAGE = process.env.REACT_APP_DEFAULT_IMAGE;
 
@@ -26,7 +17,7 @@ const PostDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { post, posts, isLoading } = useSelector((state) => state.posts);
+  const { post, posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {

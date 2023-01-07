@@ -7,7 +7,6 @@ import {
   updatePost,
   deletePost,
   likePost,
-  commentPost,
 } from "../actionCreators/posts";
 
 const initialState = {

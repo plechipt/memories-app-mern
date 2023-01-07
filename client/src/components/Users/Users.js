@@ -24,7 +24,7 @@ const Users = () => {
     <Grow in>
       <List className={classes.root}>
         {users.map(({ _id, avatarUrl, username }) => (
-          <User key={_id} avatarUrl={avatarUrl} username={username} />
+          <User key={_id} id={_id} avatarUrl={avatarUrl} username={username} />
         ))}
       </List>
     </Grow>

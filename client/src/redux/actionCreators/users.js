@@ -11,6 +11,16 @@ export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
   }
 });
 
+export const getUser = createAsyncThunk("posts/getUser", async (id) => {
+  try {
+    const { data } = await api.getUser(id);
+
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 export const register = createAsyncThunk(
   "users/register",
   async (user, { rejectWithValue }) => {

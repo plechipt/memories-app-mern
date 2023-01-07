@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import {
   getAllUsers,
+  getUser,
   register,
   login,
   googleLogin,
@@ -66,6 +67,14 @@ export const userSlice = createSlice({
       const { users } = action.payload;
 
       state.users = users;
+      state.isLoading = false;
+    },
+    [getUser.fulfilled]: (state, action) => {
+      const user = action.payload;
+
+      console.log(user);
+
+      state.user = user;
       state.isLoading = false;
     },
     [register.fulfilled]: (state, action) => {

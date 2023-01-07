@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import useStyles from "./styles";
 
@@ -9,10 +10,15 @@ import {
   Typography,
 } from "@material-ui/core";
 
-const User = ({ avatarUrl, username }) => {
+const User = ({ id, avatarUrl, username }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
   return (
-    <ListItem className={classes.listItem}>
+    <ListItem
+      onClick={() => navigate(`/users/${id}`)}
+      className={classes.listItem}
+    >
       <ListItemAvatar>
         <Avatar src={avatarUrl} />
       </ListItemAvatar>
