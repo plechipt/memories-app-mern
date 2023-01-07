@@ -64,8 +64,6 @@ export const createPost = async (req, res) => {
     creator: req.username,
   });
 
-  console.log("test");
-
   try {
     await newPost.save();
 

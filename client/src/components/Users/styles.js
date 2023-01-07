@@ -11,6 +11,12 @@ export default makeStyles((theme) => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
   },
+  listItem: {
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: theme.palette.grey[200],
+    },
+  },
   userDetail: {
     display: "flex",
     alignItems: "center",
