@@ -15,8 +15,6 @@ export const getUser = createAsyncThunk("posts/getUser", async (id) => {
   try {
     const { data } = await api.getUser(id);
 
-    console.log("test");
-
     return data;
   } catch (error) {
     console.log(error.message);

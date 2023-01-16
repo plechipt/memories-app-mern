@@ -10,6 +10,7 @@ import Navbar from "./components//Navbar/Navbar";
 import PostDetail from "./components/PostDetail/PostDetail";
 import Users from "./components/Users/Users";
 import UserDetail from "./components/UserDetail/UserDetail";
+import Chat from "./components/Chat/Chat";
 
 import { turnOnUserLoading, checkUser } from "./redux/slices/users";
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/users" element={<Users />} />
         <Route path="/users/:id" element={<UserDetail />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/login" exact element={<Login />} />
         <Route path="/register" exact element={<Register />} />
       </Routes>

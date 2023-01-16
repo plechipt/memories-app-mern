@@ -18,8 +18,6 @@ const Users = () => {
     dispatch(getAllUsers());
   }, []);
 
-  console.log(users);
-
   return !users ? (
     <CircularProgress color="primary" />
   ) : (
