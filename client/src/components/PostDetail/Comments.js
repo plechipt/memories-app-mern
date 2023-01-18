@@ -19,8 +19,6 @@ const Comments = ({ post }) => {
 
   useEffect(() => {
     const { comments } = post;
-    dispatch(turnOnLoading());
-
     setComments(comments);
   }, [post]);
 

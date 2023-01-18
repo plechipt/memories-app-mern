@@ -4,23 +4,11 @@ import User from "../models/User.js";
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
+    const allUsers = await User.find();
 
-    res.status(200).json({ users });
+    res.status(200).json({ allUsers });
   } catch (err) {
     res.status(500).json({ message: "Server Error" });
-  }
-};
-
-export const getUser = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const user = await User.findById(id).select("-password");
-
-    res.status(200).json({ user });
-  } catch (error) {
-    res.json({ message: error.message });
   }
 };
 
