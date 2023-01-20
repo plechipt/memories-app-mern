@@ -36,7 +36,6 @@ const PostDetail = () => {
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
   const openPost = (_id) => {
-    dispatch(turnOnLoading());
     navigate(`/posts/${_id}`);
   };
 
