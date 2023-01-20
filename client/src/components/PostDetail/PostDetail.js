@@ -17,13 +17,15 @@ const PostDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { post, posts } = useSelector((state) => state.posts);
+  const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(turnOnLoading());
     dispatch(fetchPost(id));
   }, [id]);
+
+  console.log(isLoading);
 
   if (!post) return null;
 
