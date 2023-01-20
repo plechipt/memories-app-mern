@@ -21,8 +21,10 @@ const PostDetail = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(turnOnLoading());
-    dispatch(fetchPost(id));
+    if (id) {
+      dispatch(turnOnLoading());
+      dispatch(fetchPost(id));
+    }
   }, [id]);
 
   console.log(isLoading);

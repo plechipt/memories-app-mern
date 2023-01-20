@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 import useStyles from "./styles";
 import { commentPost } from "../../redux/actionCreators/posts";
-import { turnOnLoading } from "../../redux/slices/posts";
 import Comment from "./Comment";
 
 const Comments = ({ post }) => {
