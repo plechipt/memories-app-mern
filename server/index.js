@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import { Server } from "socket.io";
 
 import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/users.js";
@@ -35,3 +36,17 @@ mongoose
   .catch((error) => console.log(error.message));
 
 //mongoose.set("useFindAndModify", false);
+
+// Socket.io
+const io = new Server(3000);
+
+io.on("connection", (socket) => {
+  console.log("test");
+  // send a message to the client
+  socket.emit("hello from server", 1, "2", { 3: Buffer.from([4]) });
+
+  // receive a message from the client
+  socket.on("hello from client", (...args) => {
+    // ...
+  });
+});
