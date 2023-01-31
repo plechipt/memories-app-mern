@@ -27,8 +27,6 @@ const PostDetail = () => {
     }
   }, [id]);
 
-  console.log(isLoading);
-
   if (!post) return null;
 
   /*
