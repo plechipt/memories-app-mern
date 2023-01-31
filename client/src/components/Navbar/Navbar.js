@@ -63,6 +63,7 @@ const Navbar = () => {
               <Typography className={classes.username} variant="h6">
                 {user.username}
               </Typography>
+              {/*
               <Button
                 onClick={() => navigate("/users")}
                 variant="contained"
@@ -71,6 +72,7 @@ const Navbar = () => {
               >
                 Users
               </Button>
+              */}
               <Button
                 onClick={handleOnLogout}
                 variant="contained"
