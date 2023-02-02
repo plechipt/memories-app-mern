@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import { Server } from "socket.io";
 
 import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/users.js";
@@ -37,6 +36,7 @@ mongoose
 
 //mongoose.set("useFindAndModify", false);
 
+/*
 // Socket.io
 const io = new Server(3000);
 
@@ -50,3 +50,4 @@ io.on("connection", (socket) => {
     // ...
   });
 });
+*/
