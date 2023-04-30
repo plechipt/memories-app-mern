@@ -14,7 +14,7 @@ import Chat from "./components/Chat/Chat";
 
 import { turnOnUserLoading, checkUser } from "./redux/slices/users";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.users);
 
@@ -39,6 +39,6 @@ function App() {
       </Routes>
     </Container>
   );
-}
+};
 
 export default App;
