@@ -22,4 +22,8 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     margin: "auto",
   },
+  avatar: {
+    margin: theme.spacing(1),
+    background: "#1976D2",
+  },
 }));

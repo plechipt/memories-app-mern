@@ -13,4 +13,8 @@ export default makeStyles((theme) => ({
   bottomText: {
     marginTop: "1em",
   },
+  avatar: {
+    margin: theme.spacing(1),
+    background: "#1976D2",
+  },
 }));
