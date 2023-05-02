@@ -1,5 +1,5 @@
 import { createTheme } from "@material-ui/core";
-const mainColor = "#1976D2";
+const mainColor = "#1462F3";
 
 export const theme = createTheme({
   palette: {
