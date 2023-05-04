@@ -114,6 +114,7 @@ export default function Register() {
                   fullWidth
                   label="Username"
                   name="username"
+                  InputLabelProps={{ required: false }}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -133,6 +134,7 @@ export default function Register() {
                   name="password"
                   type="password"
                   autoComplete="new-password"
+                  InputLabelProps={{ required: false }}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -156,6 +158,7 @@ export default function Register() {
                   name="password"
                   type="password"
                   autoComplete="new-password"
+                  InputLabelProps={{ required: false }}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
