@@ -15,6 +15,6 @@ export default makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    background: "#1462F3",
+    background: "#1976D2",
   },
 }));
