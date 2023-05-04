@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   AppBar,
   Typography,
@@ -63,16 +64,6 @@ const Navbar = () => {
               <Typography className={classes.username} variant="h6">
                 {user.username}
               </Typography>
-              {/*
-              <Button
-                onClick={() => navigate("/users")}
-                variant="contained"
-                className={classes.users}
-                color="primary"
-              >
-                Users
-              </Button>
-              */}
               <Button
                 onClick={handleOnLogout}
                 variant="contained"
@@ -89,7 +80,7 @@ const Navbar = () => {
                 to="/login"
                 variant="contained"
                 color="primary"
-                size="large"
+                size="medium"
               >
                 Sign Up
               </Button>
@@ -99,7 +90,7 @@ const Navbar = () => {
                 to="/register"
                 variant="contained"
                 color="primary"
-                size="large"
+                size="medium"
               >
                 Sign In
               </Button>

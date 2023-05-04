@@ -35,7 +35,7 @@ export default makeStyles((theme) => ({
   profile: {
     display: "flex",
     justifyContent: "space-between",
-    width: "400px",
+    width: "300px",
     alignItems: "center",
     [theme.breakpoints.down("sm")]: {
       width: "auto",
@@ -46,10 +46,14 @@ export default makeStyles((theme) => ({
   users: {
     marginLeft: "20px",
   },
-  userName: {
+  username: {
     display: "flex",
     alignItems: "center",
     textAlign: "center",
+    [theme.breakpoints.down("md")]: {
+      marginLeft: 20,
+      marginRight: 20,
+    },
   },
   brandContainer: {
     display: "flex",
