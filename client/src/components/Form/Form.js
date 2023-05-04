@@ -80,11 +80,7 @@ const Form = () => {
           fullWidth
           value={formData.title}
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          InputLabelProps={{
-            classes: {
-              asterisk: classes.asterisk,
-            },
-          }}
+          InputLabelProps={{ required: false }}
         ></TextField>
         <TextField
           required
@@ -96,11 +92,7 @@ const Form = () => {
           multiline
           minRows={3}
           onChange={(e) => setFormData({ ...formData, text: e.target.value })}
-          InputLabelProps={{
-            classes: {
-              asterisk: classes.asterisk,
-            },
-          }}
+          InputLabelProps={{ required: false }}
         ></TextField>
         <TextField
           required={true}
@@ -112,11 +104,7 @@ const Form = () => {
           onChange={(e) =>
             setFormData({ ...formData, tags: e.target.value.split(",") })
           }
-          InputLabelProps={{
-            classes: {
-              asterisk: classes.asterisk,
-            },
-          }}
+          InputLabelProps={{ required: false }}
         ></TextField>
         <div className={classes.fileInput}>
           <FileBase

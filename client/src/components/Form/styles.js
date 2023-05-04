@@ -21,7 +21,4 @@ export default makeStyles((theme) => ({
   buttonSubmit: {
     marginBottom: 10,
   },
-  asterisk: {
-    color: "transparent",
-  },
 }));
