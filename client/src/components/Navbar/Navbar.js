@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   AppBar,
   Typography,
@@ -76,21 +75,23 @@ const Navbar = () => {
           ) : (
             <>
               <Button
+                className={classes.authButton}
                 component={Link}
                 to="/login"
                 variant="contained"
                 color="primary"
-                size="medium"
+                size="large"
               >
                 Sign Up
               </Button>
               <Box mr={3} />
               <Button
+                className={classes.authButton}
                 component={Link}
                 to="/register"
                 variant="contained"
                 color="primary"
-                size="medium"
+                size="large"
               >
                 Sign In
               </Button>

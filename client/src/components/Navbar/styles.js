@@ -40,6 +40,7 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "auto",
       marginTop: 20,
+      marginBottom: 10,
       justifyContent: "center",
     },
   },
@@ -63,5 +64,12 @@ export default makeStyles((theme) => ({
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
+  },
+  authButton: {
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 20,
+      marginBottom: 10,
+      fontSize: 13.5,
+    },
   },
 }));
