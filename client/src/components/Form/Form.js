@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { TextField, Button, Typography, Paper } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  InputLabel,
+} from "@material-ui/core";
 import FileBase from "react-file-base64";
 
 import { addPost, updatePost } from "../../redux/actionCreators/posts";
@@ -10,7 +16,6 @@ import useStyles from "./styles";
 const Form = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { receivedFormData } = useSelector((state) => state.form.form);
   const [formIsInUpdateMode, setFormIsInUpdateMode] = useState(false);
@@ -75,6 +80,11 @@ const Form = () => {
           fullWidth
           value={formData.title}
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          InputLabelProps={{
+            classes: {
+              asterisk: classes.asterisk,
+            },
+          }}
         ></TextField>
         <TextField
           required
@@ -83,9 +93,14 @@ const Form = () => {
           label="Text"
           fullWidth
           value={formData.text}
-          onChange={(e) => setFormData({ ...formData, text: e.target.value })}
           multiline
           minRows={3}
+          onChange={(e) => setFormData({ ...formData, text: e.target.value })}
+          InputLabelProps={{
+            classes: {
+              asterisk: classes.asterisk,
+            },
+          }}
         ></TextField>
         <TextField
           required={true}
@@ -97,6 +112,11 @@ const Form = () => {
           onChange={(e) =>
             setFormData({ ...formData, tags: e.target.value.split(",") })
           }
+          InputLabelProps={{
+            classes: {
+              asterisk: classes.asterisk,
+            },
+          }}
         ></TextField>
         <div className={classes.fileInput}>
           <FileBase
