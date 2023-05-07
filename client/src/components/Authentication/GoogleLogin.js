@@ -33,6 +33,7 @@ const GoogleLogin = () => {
   return (
     <div className={classes.googleLoginButton}>
       <GoogleLoginButton
+        cookiePolicy="single-host-origin"
         onSuccess={handleLogin}
         onError={() => {
           console.log("Login Failed");
