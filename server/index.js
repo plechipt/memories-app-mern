@@ -7,22 +7,13 @@ import cors from "cors";
 import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/users.js";
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://my-mern-memories-app.netlify.app",
-];
+const allowedOrigins = ["https://my-mern-memories-app.netlify.app"];
 
 const app = express();
 dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-
-app.use(
-  cors({
-    origin: allowedOrigins,
-  })
-);
 
 // Route files
 app.use("/posts", postRoutes);
