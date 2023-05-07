@@ -21,4 +21,16 @@ export default makeStyles((theme) => ({
   buttonSubmit: {
     marginBottom: 10,
   },
+  imageButton: {
+    display: "inline-block",
+    backgroundColor: "red",
+    color: "white",
+    padding: "12px 24px",
+    textAlign: "center",
+    textDecoration: "none",
+    fontSize: "16px",
+    borderRadius: "4px",
+    border: "none",
+    cursor: "pointer",
+  },
 }));
